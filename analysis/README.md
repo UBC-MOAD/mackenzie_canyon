@@ -6,7 +6,7 @@ The links below are to static renderings of the notebooks via
 Descriptions below the links are from the first cell of the notebooks
 (if that cell contains Markdown or raw text).
 
-* ##[NEMOgcm_DataStructure.ipynb](http://nbviewer.ipython.org/urls/bitbucket.org/salishsea/analysis/raw/tip/jie/NEMOgcm_DataStructure.ipynb)  
+* ##[NEMOgcm_DataStructure.ipynb](http://nbviewer.ipython.org/urls/bitbucket.org/canyonsubc/mackenzie_canyon/NEMOgcm_DataStructure.ipynb)  
     
     January, 2016: Getting familiarized with ANHA model output.  
 
