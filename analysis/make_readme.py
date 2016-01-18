@@ -24,7 +24,7 @@ import re
 
 nbviewer = 'http://nbviewer.ipython.org/urls'
 repo = 'bitbucket.org/canyonsubc'
-repo_dir = 'mackenzie_canyon/raw/tip'
+repo_dir = 'mackenzie_canyon/raw/tip/analysis'
 url = os.path.join(nbviewer, repo, repo_dir)
 title_pattern = re.compile('#{1,6} ?')
 readme = """The IPython Notebooks in this directory are made by Jie for
