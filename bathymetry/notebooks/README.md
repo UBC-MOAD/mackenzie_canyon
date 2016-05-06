@@ -21,10 +21,6 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##License
 
-These notebooks and files are copyright 2013-2016
-by the Salish Sea MEOPAR Project Contributors
-and The University of British Columbia.
-
-They are licensed under the Apache License, Version 2.0.
-http://www.apache.org/licenses/LICENSE-2.0
+These notebooks and files are licensed under the Apache License, Version 2.0.
+http://www.apache.org/licenses/LICENSE-2.0 by the CanyonsUBC group.
 Please see the LICENSE file for details of the license.
