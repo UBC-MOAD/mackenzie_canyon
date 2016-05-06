@@ -39,6 +39,8 @@ The links below are to static renderings of the notebooks via
 Descriptions under the links below are from the first cell of the notebooks
 (if that cell contains Markdown or raw text).
 
+##Author: Idalia Machuca
+
 """
     for fn in glob.glob('*.ipynb'):
         readme += '* ##[{fn}]({url}/{fn})  \n    \n'.format(fn=fn, url=url)
