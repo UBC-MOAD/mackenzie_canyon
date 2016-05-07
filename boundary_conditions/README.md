@@ -6,7 +6,7 @@ The links below are to static renderings of the notebooks via
 Descriptions under the links below are from the first cell of the notebooks
 (if that cell contains Markdown or raw text).
 
-##Author: Idalia Machuca
+##Author: Idalia Machuca, University of British Columbia
 
 * ##[PlotANHA.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/PlotANHA.ipynb)  
     
