@@ -1,5 +1,5 @@
 The Jupyter Notebooks in this directory are for development and testing of
-the bathymetry (BASIC and REAL) used in the Mackenzie NEMO model configuration.
+the bathymetry (IDEALIZED and REALISTIC) used in the Mackenzie NEMO model configuration.
 
 The links below are to static renderings of the notebooks via
 [nbviewer.jupyter.org](http://nbviewer.jupyter.org/).
@@ -8,10 +8,6 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##Author: Idalia Machuca, University of British Columbia
 
-* ##[make_BASIC.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_BASIC.ipynb)  
-    
-    May 5: Constructing BASIC, the bathymetry of an idealized canyon with the dimensions of Mackenzie canyon that will be used to test NEMO's performance at these scales.  
-
 * ##[gyre_test.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_test.ipynb)  
     
     May 9: Looking at the results of GYRE, the NEMO configuration test run.  
@@ -19,6 +15,10 @@ Descriptions under the links below are from the first cell of the notebooks
 * ##[plot_arctic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_arctic.ipynb)  
     
     May 4: Generates projection of the Arctic Ocean bathymetry using IBCAO_V3_500m_RR grid.  
+
+* ##[make_idealized.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_idealized.ipynb)  
+    
+    May 5: Constructing IDEALIZED, the bathymetry of an idealized canyon with the dimensions of Mackenzie canyon that will be used to test NEMO's performance at these scales.  
 
 * ##[plot_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_mackenzie.ipynb)  
     

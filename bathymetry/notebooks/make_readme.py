@@ -32,7 +32,7 @@ def main():
     url = os.path.join(NBVIEWER, REPO, REPO_DIR)
     readme = """\
 The Jupyter Notebooks in this directory are for development and testing of
-the bathymetry (BASIC and REAL) used in the Mackenzie NEMO model configuration.
+the bathymetry (IDEALIZED and REALISTIC) used in the Mackenzie NEMO model configuration.
 
 The links below are to static renderings of the notebooks via
 [nbviewer.jupyter.org](http://nbviewer.jupyter.org/).
