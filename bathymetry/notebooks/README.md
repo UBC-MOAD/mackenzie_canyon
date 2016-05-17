@@ -8,13 +8,18 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##Author: Idalia Machuca, University of British Columbia
 
+* ##[coordinates_salishsea.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/coordinates_salishsea.ipynb)  
+    
+    May 17: Examining the coordinates file used for the NEMO configuration of the Salish Sea.  
+
 * ##[gyre_test.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_test.ipynb)  
     
     May 9: Looking at the results of GYRE, the NEMO configuration test run.  
 
 * ##[plot_arctic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_arctic.ipynb)  
     
-    May 4: Generates projection of the Arctic Ocean bathymetry using IBCAO_V3_500m_RR grid.  
+    May 4: Generates bathymetry diagram of the Arctic Ocean using IBCAO_V3_500m_RR and   
+    IBCAO_V3_30arcsec_RR grid.  
 
 * ##[make_idealized.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_idealized.ipynb)  
     
@@ -22,7 +27,7 @@ Descriptions under the links below are from the first cell of the notebooks
 
 * ##[plot_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_mackenzie.ipynb)  
     
-    May 4: A closer look at the bathymetry of Mackenzie Canyon as depicted by the IBCAO_V3_500m_RR grid.  
+    May 4: A closer look at the bathymetry of Mackenzie Canyon as depicted by the IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR.  
 
 
 ##License
