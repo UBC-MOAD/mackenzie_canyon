@@ -8,9 +8,9 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##Author: Idalia Machuca, University of British Columbia
 
-* ##[coordinates_salishsea.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/coordinates_salishsea.ipynb)  
+* ##[coords_bathy_salishsea.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/coords_bathy_salishsea.ipynb)  
     
-    May 17: Examining the coordinates file used for the NEMO configuration of the Salish Sea.  
+    May 17: Examining the coordinates and bathymetry files used for the NEMO configuration of the Salish Sea.  
 
 * ##[gyre_test.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_test.ipynb)  
     
