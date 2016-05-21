@@ -10,24 +10,23 @@ Descriptions under the links below are from the first cell of the notebooks
 
 * ##[coords_bathy_salishsea.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/coords_bathy_salishsea.ipynb)  
     
-    May 17: Examining the coordinates and bathymetry files used for the NEMO configuration of the Salish Sea.  
+    May 17: Details about coordinates and bathymetry files using the NEMO configuration of the Salish Sea model as an example.  
 
 * ##[gyre_test.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_test.ipynb)  
     
-    May 9: Looking at the results of GYRE, the NEMO configuration test run.  
+    May 9: Results of the original GYRE configuration, simple bathymetry used for new gyre configuration GYRE0, results of GYRE0.  
 
 * ##[plot_arctic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_arctic.ipynb)  
     
-    May 4: Generates bathymetry diagram of the Arctic Ocean using IBCAO_V3_500m_RR and   
-    IBCAO_V3_30arcsec_RR grid.  
+    May 4: Bathymetry of the Arctic Ocean using IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR grids.  
 
 * ##[make_idealized.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_idealized.ipynb)  
     
-    May 5: Constructing IDEALIZED, the bathymetry of an idealized canyon with the dimensions of Mackenzie canyon that will be used to test NEMO's performance at these scales.  
+    May 5: IDEALIZED: Bathymetry of an idealized canyon with the dimensions of Mackenzie canyon that will be used to test NEMO's performance at these scales.  
 
 * ##[plot_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_mackenzie.ipynb)  
     
-    May 4: A closer look at the bathymetry of Mackenzie Canyon as depicted by the IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR.  
+    May 4: Bathymetry of Mackenzie Canyon as depicted by the IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR.  
 
 
 ##License
