@@ -10,7 +10,7 @@ Descriptions under the links below are from the first cell of the notebooks
 
 * ##[gyre_runs.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_runs.ipynb)  
     
-    May 9: Results of the original GYRE configuration, simple bathymetry used for new gyre configuration GYRE0, results of GYRE0.  
+    May 9: Results of the original GYRE configuration, bathymetry and coordinates for a new gyre configuration.  
 
 * ##[coords_bathy_salishsea.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/coords_bathy_salishsea.ipynb)  
     
