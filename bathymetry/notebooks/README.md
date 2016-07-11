@@ -16,6 +16,8 @@ Descriptions under the links below are from the first cell of the notebooks
     
     May 17: Details about coordinates and bathymetry files using the NEMO configuration of the Salish Sea model as an example.  
 
+* ##[tools_make_idealized.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/tools_make_idealized.ipynb)  
+    
 * ##[plot_arctic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_arctic.ipynb)  
     
     May 4: Bathymetry of the Arctic Ocean using IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR grids.  
