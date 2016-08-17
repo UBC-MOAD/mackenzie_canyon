@@ -10,6 +10,8 @@ Descriptions under the links below are from the first cell of the notebooks
 
 * ##[make_idealized_attempt2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_idealized_attempt2.ipynb)  
     
+    July: Initial attempt at using canyon tools to build idealized canyon.  
+
 * ##[gyre_runs.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_runs.ipynb)  
     
     May 9: Results of the original GYRE configuration **GYRE_Test**, second set of configurations **attempt1** where bathymetry and forcing are tested, third set of configurations **attempt2** where the forcing was changed, and instructions and log of progress.  
@@ -18,17 +20,17 @@ Descriptions under the links below are from the first cell of the notebooks
     
     May 17: Details about coordinates and bathymetry files using the NEMO configuration of the Salish Sea model as an example.  
 
-* ##[make_idealized_final.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_idealized_final.ipynb)  
-    
-    This notebook reviews and modifies the functions used to create the bathymetry profiles of a shelf, slope, and canyon. The original functions can be found in https://bitbucket.org/canyonsubc/buildcanyon/src/f2380a66a5fe4fc9e373e46f409a57c5fa4b8f9d/PythonModulesMITgcm/BathyPythonTools.py.    
-
 * ##[plot_arctic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_arctic.ipynb)  
     
     May 4: Bathymetry of the Arctic Ocean using IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR grids.  
 
+* ##[make_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_mackenzie.ipynb)  
+    
+    August: Final Mackenzie Canyon bathymetry. This notebook reviews and modifies the functions used to create the bathymetry profiles of a shelf, slope, and canyon. The original functions can be found in https://bitbucket.org/canyonsubc/buildcanyon/src/f2380a66a5fe4fc9e373e46f409a57c5fa4b8f9d/PythonModulesMITgcm/BathyPythonTools.py.  
+
 * ##[make_idealized_attempt1.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_idealized_attempt1.ipynb)  
     
-    May 5: IDEALIZED: Bathymetry of an idealized canyon with the dimensions of Mackenzie canyon that will be used to test NEMO's performance at these scales.  
+    May 5: Idealized canyons based on equations from previous studies.  
 
 * ##[plot_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_mackenzie.ipynb)  
     
