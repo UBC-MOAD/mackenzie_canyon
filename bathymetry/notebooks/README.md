@@ -8,33 +8,33 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##Author: Idalia Machuca, University of British Columbia
 
-* ##[make_idealized_attempt2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_idealized_attempt2.ipynb)  
+* ##[draft_make_mackenzie2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/draft_make_mackenzie2.ipynb)  
     
-    July: Initial attempt at using canyon tools to build idealized canyon.  
+    July: Attempt 2 - Using canyon tools as is.  
 
 * ##[gyre_runs.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_runs.ipynb)  
     
-    May 9: Results of the original GYRE configuration **GYRE_Test**, second set of configurations **attempt1** where bathymetry and forcing are tested, third set of configurations **attempt2** where the forcing was changed, and instructions and log of progress.  
-
-* ##[coords_bathy_salishsea.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/coords_bathy_salishsea.ipynb)  
-    
-    May 17: Details about coordinates and bathymetry files using the NEMO configuration of the Salish Sea model as an example.  
+    May: Results of the original GYRE configuration **GYRE_Test**, second set of configurations **attempt1** where bathymetry and forcing are tested, third set of configurations **attempt2** where the forcing was changed, and instructions and log of progress.  
 
 * ##[plot_arctic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_arctic.ipynb)  
     
-    May 4: Bathymetry of the Arctic Ocean using IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR grids.  
+    May: Bathymetry of the Arctic Ocean using IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR grids.  
+
+* ##[draft_make_mackenzie1.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/draft_make_mackenzie1.ipynb)  
+    
+    May: Attempt 1 - Idealized canyons based on equations from previous studies.  
+
+* ##[salishsea_setup.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/salishsea_setup.ipynb)  
+    
+    May: Details about coordinates and bathymetry files using the NEMO configuration of the Salish Sea model as an example.  
 
 * ##[make_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_mackenzie.ipynb)  
     
     August: Final Mackenzie Canyon bathymetry. This notebook reviews and modifies the functions used to create the bathymetry profiles of a shelf, slope, and canyon. The original functions can be found in https://bitbucket.org/canyonsubc/buildcanyon/src/f2380a66a5fe4fc9e373e46f409a57c5fa4b8f9d/PythonModulesMITgcm/BathyPythonTools.py.  
 
-* ##[make_idealized_attempt1.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_idealized_attempt1.ipynb)  
-    
-    May 5: Idealized canyons based on equations from previous studies.  
-
 * ##[plot_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_mackenzie.ipynb)  
     
-    May 4: Bathymetry of Mackenzie Canyon as depicted by the IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR.  
+    May: Bathymetry of Mackenzie Canyon as depicted by the IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR.  
 
 
 ##License
