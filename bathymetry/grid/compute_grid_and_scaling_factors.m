@@ -35,17 +35,19 @@ addpath /users/staff/jppaquin/matlab/netcdf_toolbox/netcdf/ncutility
 
 addpath ../seagrid
 
-path_seagrid='/users/staff/jppaquin/NEMO_PREPARATION/1_Seagrid_generator';
+%path_seagrid='/users/staff/jppaquin/NEMO_PREPARATION/1_Seagrid_generator';
 %- Infile
-file_seagrid='grid_mat/seagrid_west_coast_1km_900x400_rot_new.mat';
+%file_seagrid='grid_mat/seagrid_west_coast_1km_900x400_rot_new.mat';
 %file_seagrid='grid_mat/seagrid_west_coast_100x100_testAnchor.mat';
 
 %- Outfile
-fileout=([path_seagrid '/scaling_factors/coordinates_seagrid_WestCoast.nc']);
+%fileout=([path_seagrid '/scaling_factors/coordinates_seagrid_WestCoast.nc']);
+fileout=(['test_coordinates_seagrid_WestCoast.nc'])
 
 
 %--- LOAD SEAGRID FILE 
-load([path_seagrid '/' file_seagrid])
+%load([path_seagrid '/' file_seagrid])
+load(['seagrid_west_coast_1km_900x400_rot_new.mat']) % IM
 lon_T=s.geographic_grids{1,1}(:,:);
 lat_T=s.geographic_grids{1,2}(:,:);
 
