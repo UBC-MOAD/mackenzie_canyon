@@ -28,12 +28,17 @@
 clear all
 display('***** compute_grid_and_scaling_factors.m *****')
 
-addpath /users/staff/jppaquin/matlab/mexnc
-addpath /users/staff/jppaquin/matlab/netcdf_toolbox/netcdf
-addpath /users/staff/jppaquin/matlab/netcdf_toolbox/netcdf/nctype
-addpath /users/staff/jppaquin/matlab/netcdf_toolbox/netcdf/ncutility
+%addpath /users/staff/jppaquin/matlab/mexnc
+%addpath /users/staff/jppaquin/matlab/netcdf_toolbox/netcdf
+%addpath /users/staff/jppaquin/matlab/netcdf_toolbox/netcdf/nctype
+%addpath /users/staff/jppaquin/matlab/netcdf_toolbox/netcdf/ncutility
 
-addpath ../seagrid
+%addpath ../seagrid
+
+addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_1/mexnc
+addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_2/netcdf_toolbox/netcdf
+addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_2/netcdf_toolbox/netcdf/nctype
+addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_2/netcdf_toolbox/netcdf/ncutility
 
 %path_seagrid='/users/staff/jppaquin/NEMO_PREPARATION/1_Seagrid_generator';
 %- Infile
