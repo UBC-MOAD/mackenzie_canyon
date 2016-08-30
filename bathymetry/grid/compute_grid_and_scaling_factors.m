@@ -26,6 +26,7 @@
 %
 %--------------------------------------------------------------------------
 clear all
+clc
 display('***** compute_grid_and_scaling_factors.m *****')
 
 %addpath /users/staff/jppaquin/matlab/mexnc
@@ -36,6 +37,7 @@ display('***** compute_grid_and_scaling_factors.m *****')
 %addpath ../seagrid
 
 addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_1/mexnc
+%addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_2/mexnc
 addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_2/netcdf_toolbox/netcdf
 addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_2/netcdf_toolbox/netcdf/nctype
 addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_2/netcdf_toolbox/netcdf/ncutility
@@ -53,6 +55,7 @@ fileout=(['test_coordinates_seagrid_WestCoast.nc'])
 %--- LOAD SEAGRID FILE 
 %load([path_seagrid '/' file_seagrid])
 load(['seagrid_west_coast_1km_900x400_rot_new.mat']) % IM
+%load(['seagrid_west_coast_100x100_testAnchor.mat']) % IM
 lon_T=s.geographic_grids{1,1}(:,:);
 lat_T=s.geographic_grids{1,2}(:,:);
 
@@ -184,7 +187,8 @@ sy(isinf(sy))=1.e+20;
 sx(isnan(sx))=1.e+20;
 sy(isnan(sy))=1.e+20;
   
-  
+%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%                     Write coordinates file NC file                    %%%%%
 f=netcdf(fileout,'clobber');
@@ -196,13 +200,13 @@ f('x')=xx;
 f('y')=yy;
 f('time')='UNLIMITED';
 
-f{'nav_lon'}=ncfloat('y','x');
-f{'nav_lon'}.units='degrees_east';
-f{'nav_lon'}.comment='at t points';
+%f{'nav_lon'}=ncfloat('y','x');
+%f{'nav_lon'}.units='degrees_east';
+%f{'nav_lon'}.comment='at t points';
 
-f{'nav_lat'}=ncfloat('y','x');
-f{'nav_lat'}.units='degrees_north';
-f{'nav_lat'}.comment='at t points';
+%f{'nav_lat'}=ncfloat('y','x');
+%f{'nav_lat'}.units='degrees_north';
+%f{'nav_lat'}.comment='at t points';
 
 f{'time'}=ncfloat('time');
 f{'time'}.units='seconds since 0001-01-01 00:00:00';
@@ -261,8 +265,8 @@ f{'e2v'}.missing_value= 1.e+20;
 f{'e2f'}=ncdouble('time', 'y', 'x');
 f{'e2f'}.missing_value= 1.e+20;
 
-f{'nav_lon'}(:) = permute(lons(1:dimx-3,1:dimy-3,1),[2,1]);
-f{'nav_lat'}(:) = permute(lats(1:dimx-3,1:dimy-3,1),[2,1]);
+%f{'nav_lon'}(:) = permute(lons(1:dimx-3,1:dimy-3,1),[2,1]);
+%f{'nav_lat'}(:) = permute(lats(1:dimx-3,1:dimy-3,1),[2,1]);
 
 f{'time'}(1:1)=0;
 f{'time_step'}(1:1)= 0;
@@ -288,7 +292,7 @@ close(f)
 display('  END WRITING COORDINATES')
 
 
-
+%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%  ORIGINAL CODE from seagrid2roms.m taht computes the scaling %%%%%
