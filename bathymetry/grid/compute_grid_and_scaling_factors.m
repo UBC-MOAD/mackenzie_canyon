@@ -4,7 +4,7 @@
 %
 % DATE: July 2013
 %
-% REVISIONS: 
+% REVISIONS: August 2016 - Idalia Machuca
 %
 % DESCRIPTION: Creates a coordinates.nc file for NEMO from outputs of the 
 %              seagrid package (WHOI) available at 
@@ -29,64 +29,22 @@ clear all
 clc
 display('***** compute_grid_and_scaling_factors.m *****')
 
-%addpath /users/staff/jppaquin/matlab/mexnc
-%addpath /users/staff/jppaquin/matlab/netcdf_toolbox/netcdf
-%addpath /users/staff/jppaquin/matlab/netcdf_toolbox/netcdf/nctype
-%addpath /users/staff/jppaquin/matlab/netcdf_toolbox/netcdf/ncutility
+% Refer to salishsea_setup.ipynb for more information.
+addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/mexnc
+addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/netcdf_toolbox/netcdf
+addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/netcdf_toolbox/netcdf/nctype
+addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/netcdf_toolbox/netcdf/ncutility
 
-%addpath ../seagrid
-
-addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_1/mexnc
-%addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_2/mexnc
-addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_2/netcdf_toolbox/netcdf
-addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_2/netcdf_toolbox/netcdf/nctype
-addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_2/netcdf_toolbox/netcdf/ncutility
-
-%path_seagrid='/users/staff/jppaquin/NEMO_PREPARATION/1_Seagrid_generator';
-%- Infile
-%file_seagrid='grid_mat/seagrid_west_coast_1km_900x400_rot_new.mat';
-%file_seagrid='grid_mat/seagrid_west_coast_100x100_testAnchor.mat';
-
-%- Outfile
-%fileout=([path_seagrid '/scaling_factors/coordinates_seagrid_WestCoast.nc']);
-fileout=(['test_coordinates_seagrid_WestCoast.nc'])
-
+%--- Outfile
+fileout=('test_coordinates_seagrid_WestCoast.nc')
 
 %--- LOAD SEAGRID FILE 
-%load([path_seagrid '/' file_seagrid])
 load(['seagrid_west_coast_1km_900x400_rot_new.mat']) % IM
 %load(['seagrid_west_coast_100x100_testAnchor.mat']) % IM
 lon_T=s.geographic_grids{1,1}(:,:);
 lat_T=s.geographic_grids{1,2}(:,:);
 
 [dimx,dimy]=size(lon_T);
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%           COMPUTE LAT/LON FOR THE U, V AND f GRIDS                    %%%%%
-%
-% Arakawa-C grid
-%
-%           f---v---f---v---f  
-%           |       |       |
-%           u   T   u   T   u
-%           |       |       |
-%           f---v---f---v---f
-%
-%
-% We define the latitudes longitudes in the output of seagrid to be the
-% location of the T grid. Therefore the location of the u grid is defined
-% as:
-%       lat_u(i,j) = 0.5 * ( lat_T(i,j) + lat_T(i+1,j) )
-%       lon_u(i,j) = 0.5 * ( lon_T(i,j) + lon_T(i+1,j) ) 
-%
-% similarly for the v grid
-%       lat_v(i,j) = 0.5 * ( lat_T(i,j) + lat_T(i,j+1) )
-%       lon_v(i,j) = 0.5 * ( lon_T(i,j) + lon_T(i,j+1) ) 
-%
-% and for the f grid:
-%       lat_f(i,j) = 0.5 * ( lat_u(i,j) + lat_u(i,j+1) )
-%       lon_f(i,j) = 0.5 * ( lon_v(i,j) + lon_v(i+1,j) ) 
-%
 
 lat_u=NaN(dimx,dimy)    ;   lon_u=NaN(dimx,dimy);
 lat_v=NaN(dimx,dimy)    ;   lon_v=NaN(dimx,dimy);
@@ -113,7 +71,6 @@ for ii=1:dimx-1
 end
 end
 
-% construire un tableau contenant toutes les lat-lons
 display('Put all lats/lons in 3D array')
 lats=NaN(dimx,dimy,4);
 lons=NaN(dimx,dimy,4);
@@ -133,20 +90,11 @@ for vv=1:4 % T,u,v,f in that order
         lons(:,:,vv)=lon_f(:,:);
   end
 end
-%clear lat_u lon_u lat_v lon_v lat_f lon_f 
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%       COMPUTE THE SCALING FACTORS FOR T, u, v and f                   %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 display('Compute distances between point for each grid... T,u,v,f')
-%  earthdist -- Distance in meters between two lon/lats.
-%    earthdist(alon, aloat, blon, blat, radius) returns the
-%    distance in meters between locations (alon, alat)
-%    and (blon, blat).  The default earth radius is
-%    assumed to be 6371*1000 meters, the radius for
-%    a sphere of equal-volume.
 radius = 6371*1000;
 
 dist_lat=NaN(dimx,dimy,4);
@@ -171,8 +119,6 @@ end
 end
 end
 
-
-
 display('Compute scaling factors (inspired by seagrid2roms.m)')
 sx=NaN(dimx,dimy,4);
 sy=NaN(dimx,dimy,4);
@@ -186,8 +132,6 @@ sx(isinf(sx))=1.e+20;
 sy(isinf(sy))=1.e+20;
 sx(isnan(sx))=1.e+20;
 sy(isnan(sy))=1.e+20;
-  
-%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%                     Write coordinates file NC file                    %%%%%
@@ -200,13 +144,13 @@ f('x')=xx;
 f('y')=yy;
 f('time')='UNLIMITED';
 
-%f{'nav_lon'}=ncfloat('y','x');
-%f{'nav_lon'}.units='degrees_east';
-%f{'nav_lon'}.comment='at t points';
+f{'nav_lon'}=ncfloat('y','x');
+f{'nav_lon'}.units='degrees_east';
+f{'nav_lon'}.comment='at t points';
 
-%f{'nav_lat'}=ncfloat('y','x');
-%f{'nav_lat'}.units='degrees_north';
-%f{'nav_lat'}.comment='at t points';
+f{'nav_lat'}=ncfloat('y','x');
+f{'nav_lat'}.units='degrees_north';
+f{'nav_lat'}.comment='at t points';
 
 f{'time'}=ncfloat('time');
 f{'time'}.units='seconds since 0001-01-01 00:00:00';
@@ -265,8 +209,8 @@ f{'e2v'}.missing_value= 1.e+20;
 f{'e2f'}=ncdouble('time', 'y', 'x');
 f{'e2f'}.missing_value= 1.e+20;
 
-%f{'nav_lon'}(:) = permute(lons(1:dimx-3,1:dimy-3,1),[2,1]);
-%f{'nav_lat'}(:) = permute(lats(1:dimx-3,1:dimy-3,1),[2,1]);
+f{'nav_lon'}(:,:) = permute(lons(1:dimx-3,1:dimy-3,1),[2,1]);
+f{'nav_lat'}(:,:) = permute(lats(1:dimx-3,1:dimy-3,1),[2,1]);
 
 f{'time'}(1:1)=0;
 f{'time_step'}(1:1)= 0;
@@ -290,73 +234,3 @@ f{'e2f'}(1:1,:,:)= permute(dist_lat(1:dimx-3,1:dimy-3,4),[2,1]);
 
 close(f)
 display('  END WRITING COORDINATES')
-
-
-%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%  ORIGINAL CODE from seagrid2roms.m taht computes the scaling %%%%%
-%%%%%  required for ROMSfactors                                    %%%%%
-% % Use "geometry" from seagrid file for computation of "pm", "pn".
-% 
-% % "geometry" contains distances computed from lon and lat in the
-% % Seagrid routine "dosave.m" using the "earthdist.m" routine, which
-% % assumes a spherical globe with a radius of 6371 km.
-% 
-% gx = geometry{1};   % Spherical distances in meters.
-% gy = geometry{2};
-% 
-% 
-% sx = 0.5*(gx(1:end-1, :) + gx(2:end, :));
-% sy = 0.5*(gy(:, 1:end-1) + gy(:, 2:end));
-% 
-% pm = 1 ./ sx;
-% pn = 1 ./ sy;
-% 
-% % pm and pn cannot be Inf, even if on land, so if values
-% % are Inf, set to an arbitrary non-zero value
-% pm(isinf(pm))=0.999e-3;
-% pn(isinf(pn))=0.999e-3;
-% pm(isnan(pm))=0.999e-3;
-% pn(isnan(pn))=0.999e-3;
-% nc{'pm'}(:) = pm;
-% nc{'pn'}(:) = pn;
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%   FUNCTION earthdist.m   %%%%%%%%%%%%%%%%%%%%
-% function theResult = earthdist(alon, alat, blon, blat, radius)
-% 
-% % earthdist -- Distance in meters between two lon/lats.
-% %  earthdist(alon, aloat, blon, blat, radius) returns the
-% %   distance in maters between locations (alon, alat)
-% %   and (blon, blat).  The default earth radius is
-% %   assumed to be 6371*1000 meters, the radius for
-% %   a sphere of equal-volume.
-% 
-% if nargin < 4, help(mfilename), return, end
-% if nargin < 5, radius = 6371*1000; end   % meters.
-% 
-% RCF = 180 / pi;
-% 
-% alon = alon / RCF;
-% alat = alat / RCF;
-% blon = blon / RCF;
-% blat = blat / RCF;
-% 
-% c = cos(alat);
-% ax = c .* cos(alon);
-% ay = c .* sin(alon);
-% az = sin(alat);
-% 
-% c = cos(blat);
-% bx = c .* cos(blon);
-% by = c .* sin(blon);
-% bz = sin(blat);
-% 
-% result = acos(ax.*bx + ay.*by + az.*bz) .* radius;
-% 
-% if nargout > 0
-% 	theResult = result;
-% else
-% 	disp(result)
-% end
