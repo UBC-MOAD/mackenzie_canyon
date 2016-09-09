@@ -36,7 +36,7 @@ addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/netc
 addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/netcdf_toolbox/netcdf/ncutility
 
 %--- Outfile
-fileout=('test_output.nc')
+fileout=('test_coordinates_seagrid_WestCoast.nc')
 
 %--- LOAD SEAGRID FILE 
 %load(['seagrid_west_coast_1km_900x400_rot_new.mat']) % IAM
