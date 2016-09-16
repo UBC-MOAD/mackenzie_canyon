@@ -36,10 +36,10 @@ addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/netc
 addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/netcdf_toolbox/netcdf/ncutility
 
 % OUTFILE
-fileout=('coordinates_mackenzie01.nc');
+fileout=('test_coordinates_mackenzie02.nc');
 
 % INFILE 
-load(['seagrid_mackenzie01.mat'])
+load(['test_seagrid_mackenzie02.mat'])
 
 %%
 
