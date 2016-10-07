@@ -16,9 +16,21 @@ Descriptions under the links below are from the first cell of the notebooks
     
     May: Results of the original GYRE configuration **GYRE_Test**, second set of configurations **attempt1** where bathymetry and forcing are tested, third set of configurations **attempt2** where the forcing was changed, and instructions and log of progress.  
 
+* ##[Mackenzie_grid_SEA.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/Mackenzie_grid_SEA.ipynb)  
+    
 * ##[make_coordinates.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_coordinates.ipynb)  
     
     May: Details about coordinates and bathymetry files using the NEMO configuration of the Salish Sea model as an example.  
+
+* ##[nemo_run_parameters.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/nemo_run_parameters.ipynb)  
+    
+* ##[Untitled.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/Untitled.ipynb)  
+    
+    this  
+
+* ##[room_of_requirement.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/room_of_requirement.ipynb)  
+    
+    Snippets.  
 
 * ##[plot_arctic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_arctic.ipynb)  
     
@@ -36,6 +48,8 @@ Descriptions under the links below are from the first cell of the notebooks
     
     May: Bathymetry of Mackenzie Canyon as depicted by the IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR.  
 
+* ##[Untitled1.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/Untitled1.ipynb)  
+    
 
 ##License
 
