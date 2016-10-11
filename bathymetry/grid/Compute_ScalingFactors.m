@@ -4,18 +4,16 @@
 %
 % DATE: July 2013
 %
-% REVISIONS: August 2016 - Idalia A Machuca
+% REVISIONS: October 2016 - Idalia A Machuca
 %
-% DESCRIPTION: Creates a coordinates.nc file for NEMO from outputs of the 
-%              seagrid package (WHOI) available at 
-%                 http://woodshole.er.usgs.gov/operations/modeling/seagrid/
-%              Computes the latitudes and longitudes of u, v, and f grids
-%              as simple averages 
-%              and their respective scaling factors (based on ROMS code)
+% DESCRIPTION: Creates a coordinates.nc file for NEMO using a grid created 
+%              by the great circle functions. Computes the latitudes and
+%              longitudes of u, v, and f grids as simple averages and their
+%              respective scaling factors (based on ROMS code).
 %
-% HYPOTHESES:  Seagrid output file has been generated
-%
-% INPUTS: Seagrid output file 
+% INPUTS: Grid file 
+%         Original: Seagrid output file
+%         Revised: Great Circle grid file
 %
 % OUTPUT: Coordinates.nc file in compatible format for NEMO
 %
@@ -25,26 +23,16 @@
 %        avoid NaNs to be present in the scaling factors. 
 %
 %--------------------------------------------------------------------------
-clear all
-clc
+
+clear all; clc
+
 display('Compute_ScalingFactors.m is a revision of compute_grid_and_scaling_factors.m')
 
-% Refer to make_coordinates.ipynb for more information.
-addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/mexnc
-addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/netcdf_toolbox/netcdf/
-addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/netcdf_toolbox/netcdf/nctype
-addpath /ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/mexcdf_all/netcdf_toolbox/netcdf/ncutility
+fileout = ('test_coordinates_mackenzie06.nc');
+infile = ('test_grid_mackenzie06.nc')
 
-% OUTFILE
-fileout=('test_coordinates_mackenzie04.nc');
-
-% INFILE 
-load(['test_seagrid_mackenzie04.mat'])
-
-%%
-
-lon_T=s.geographic_grids{1,1}(:,:);
-lat_T=s.geographic_grids{1,2}(:,:);
+lon_T = ncread(infile, 'grid_lons');
+lat_T = ncread(infile, 'grid_lats');
 
 [dimx,dimy]=size(lon_T);
 
@@ -76,7 +64,7 @@ end
 display('Put all lats/lons in 3D array')
 lats=NaN(dimx,dimy,4);
 lons=NaN(dimx,dimy,4);
-for vv=1:4 % T,u,v,f in that order
+for vv=1:4
   switch vv
       case 1 
         lats(:,:,vv)=lat_T(:,:);
@@ -98,10 +86,9 @@ radius = 6371*1000;
 
 dist_lat=NaN(dimx,dimy,4);
 dist_lon=NaN(dimx,dimy,4);
-for vv=1:4 % T,u,v,f
+for vv=1:4
 for jj=1:dimy-1
 for ii=1:dimx-1   
-  % distance in lat  
   alat=lats(ii  ,jj  ,vv) ;
   alon=lons(ii  ,jj  ,vv) ;
   
@@ -109,7 +96,6 @@ for ii=1:dimx-1
   blon=lons(ii+1,jj,vv) ;
   dist_lat(ii,jj,vv) = earthdist(alon, alat, blon, blat, radius); % eq to gy
 
-  % distance in lon
   blat=lats(ii  ,jj+1,vv) ; 
   blon=lons(ii  ,jj+1,vv) ;
   dist_lon(ii,jj,vv) = earthdist(alon, alat, blon, blat, radius); % eq to gx
@@ -121,20 +107,16 @@ end
 display('Compute scaling factors (inspired by seagrid2roms.m)')
 sx=NaN(dimx,dimy,4);
 sy=NaN(dimx,dimy,4);
-for vv=1:4 % T,u,v,f
+for vv=1:4 
   sx(1:dimx-1,1:dimy  ,vv) = 0.5*(dist_lon(1:end-1,   :   ,vv) + dist_lon(2:end,   :  ,vv));
   sy(1:dimx  ,1:dimy-1,vv) = 0.5*(dist_lat(   :   ,1:end-1,vv) + dist_lat(  :  , 2:end,vv));
 end
-% sx and sy cannot be Inf, even if on land, so if values
-% are Inf, set to an arbitrary non-zero value
+
 sx(isinf(sx))=1.e+20;
 sy(isinf(sy))=1.e+20;
 sx(isnan(sx))=1.e+20;
 sy(isnan(sy))=1.e+20;
 
-%%
-
-% Revisions -- IAM
 
 display('Write netcdf file')
 ncid = netcdf.create(fileout,'CLOBBER');
