@@ -20,14 +20,10 @@ Descriptions under the links below are from the first cell of the notebooks
     
 * ##[make_coordinates.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_coordinates.ipynb)  
     
-    May: Details about coordinates and bathymetry files using the NEMO configuration of the Salish Sea model as an example.  
+    May: Details about the coordinates file used the NEMO.  
 
 * ##[nemo_run_parameters.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/nemo_run_parameters.ipynb)  
     
-* ##[Untitled.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/Untitled.ipynb)  
-    
-    this  
-
 * ##[room_of_requirement.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/room_of_requirement.ipynb)  
     
     Snippets.  
@@ -42,7 +38,7 @@ Descriptions under the links below are from the first cell of the notebooks
 
 * ##[make_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_mackenzie.ipynb)  
     
-    August: Final Mackenzie Canyon bathymetry.  
+    August: Various versions of Mackenzie Canyon bathymetry.  
 
 * ##[plot_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_mackenzie.ipynb)  
     
