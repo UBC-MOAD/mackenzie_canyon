@@ -28,8 +28,8 @@ clear all; clc
 
 display('Compute_ScalingFactors.m is a revision of compute_grid_and_scaling_factors.m')
 
-fileout = ('test_coordinates_mackenzie06.nc');
-infile = ('test_grid_mackenzie06.nc')
+fileout = ('coords_mack06.nc');
+infile = ('grid_mack06.nc')
 
 lon_T = ncread(infile, 'grid_lons');
 lat_T = ncread(infile, 'grid_lats');
