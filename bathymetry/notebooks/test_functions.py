@@ -482,3 +482,29 @@ def compile_grid_coordinates(nx, ny, lon, lat):
         thelats[i, j], thelons[i, j] = step_forward(thelats[i, j-1], thelons[i, j-1], dx, angle)
 
     return thelons, thelats
+
+#----------------------------------------------------------------------------------
+import numpy as np
+from pyproj import Proj, transform
+
+def transform_coords_geog_stere(lon_g, lat_g):
+    ''' Convert geographic coordinates of all grid
+    points in the domain to stereographic coordinates. 
+    
+    :arg lon_g: Geographic longitudes
+    :arg lat_g: Geographic latitudes
+    :returns: Stereographic longitudes and latitudes
+    '''
+    
+    # Geographical coordinate system
+    proj_geogr = Proj("+init=EPSG:4326")
+    
+    # IBCAO polar stereographic
+    proj_stere = Proj("+init=EPSG:3996") 
+    
+    lon_s =  np.zeros_like(lon_g)
+    lat_s =  np.zeros_like(lat_g)
+    for i in np.arange(lon_g.shape[0]):
+        lon_s[i,:], lat_s[i,:] = transform(proj_geogr, proj_stere, lon_g[i,:], lat_g[i,:])
+    
+    return lon_s, lat_s
