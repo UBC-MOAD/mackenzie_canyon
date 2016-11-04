@@ -65,7 +65,7 @@ def canyontopo(y, y_base, y_break, y_head, y_coast,
     return canyon_profile
 #----------------------------------------------------------------------------------
    
-def widthprofile(y, y_base, y_break, y_head, y_coast, cR,
+def widthprofile(y, y_base, y_break, y_head, y_coast, cR, L,
                  w_break, w_mid, w_head, p):
     
     ''' This function defines the width profile of the canyon (top-down view).
@@ -101,7 +101,7 @@ def widthprofile(y, y_base, y_break, y_head, y_coast, cR,
     return width_profile
 #----------------------------------------------------------------------------------
 
-def make_topo_smooth(y, y_base, y_break, y_head, y_coast, cR,
+def make_topo_smooth(y, y_base, y_break, y_head, y_coast, cR, L,
                      x, x_wall, w_break, w_mid, w_head, p,
                      fluid_depth, z_bottom, z_break, z_wall):
     
@@ -136,7 +136,7 @@ def make_topo_smooth(y, y_base, y_break, y_head, y_coast, cR,
                                 fluid_depth, z_bottom, z_break, z_wall)
   
     # Slope of the canyon as well as the shape
-    width_profile = widthprofile(y, y_base, y_break, y_head, y_coast, cR,
+    width_profile = widthprofile(y, y_base, y_break, y_head, y_coast, cR, L,
                                  w_break, w_mid, w_head, p)
   
     # Depth of the canyon (negative values set to zero)
