@@ -8,6 +8,122 @@ import time
 from salishsea_tools import geo_tools
 from pyproj import Proj, transform
 
+def find_distance(p_one, p_two):
+    ''' Finds the distance between two points.
+    This is used to find the various canyon
+    dimensions, such as widths and cross and along
+    shore distances.
+    '''
+    xmax = abs(p_one[0])
+    xmin = abs(p_two[0])
+    ymax = p_one[1]
+    ymin = p_two[1]
+    dist = np.sqrt((xmax - xmin)**2 + (ymax - ymin)**2)
+    return dist
+
+# ------------------------------------------------------------------------------------------------
+
+def match_distance(p1_x, p1_y, p2_x, m_slope, ideal):
+    ''' Use a reference point [p1_x, p1_y] and the 
+    slope of the line to find the second point
+    [p2_x, p2_y]. dist gives the length of the line. 
+    The goal is to realistic distances found here
+    with those set in the idealized canyon domain.
+    The ideal case would be for dist = dim leading
+    to diff_dist ~ 0.
+    '''
+    p2_y = p1_y + (m_slope * (p2_x - p1_x))
+    dist = find_distance([p1_x, p1_y], [p2_x, p2_y])
+    diff = ideal - dist
+    return p2_y, dist, diff
+
+# ------------------------------------------------------------------------------------------------
+
+def match_lines(p1_x, p1_y, p2_x_iterate, m_slope, ideal):
+    '''This function searches for the stereographic coordinate
+    which would create the line of the length required in 
+    order to match with the corresponding side of the 
+    idealized domain. p1_x and p1_y are the coordinates
+    for the the point p1 where the line begines. m_slope is
+    the slope of the line, p2_x_iterate is the coordinates
+    through which the function iterates to find the one where
+    the resulting line length is closes to the the value of 
+    ideal which is the dimension of the idealized domain.
+    '''
+    for x_i in p2_x_iterate:
+        y_i, dist_i, diff_i = match_distance(p1_x, p1_y, x_i, m_slope, ideal)
+        if abs(diff_i) < 300.0:
+            p2_x = x_i
+            p2_y = y_i
+            p2_dist = dist_i
+            p2_diff = diff_i
+        else:
+            pass
+    return p2_x, p2_y, p2_dist, p2_diff
+
+# ------------------------------------------------------------------------------------------------
+
+def match_domain(x_wall, y_wall, search_x, ax, slope=1.1, p_x0 = -1457500.0, p_y0 = 1348000.0):
+    '''This is the main function used to create the realistic domain.
+    It uses match_lines to create each section of the rectangle.
+    It makes the right angle corners and the sides are as close
+    as possible to the size of the idealized domain. The key here
+    is to define the slope of the domain (the angle of the sides),
+    the length and width of the idealized domain, and the initial
+    reference point p2_x0 and p2_y0. They were called p2 because
+    they were originally the second point in the line running
+    along the axis of the canyon. This function also plots the
+    lines. Search_x is the range of x coordinates that will be
+    iterated through in order to find the one that produces the
+    line length closest to the ideal size. The -500 is used
+    when iterating leftward and 500 for rightward.'''
+
+    # All the slopes needed to make the perpendicular corners
+    m_slope = np.zeros(4)
+    m_slope[0] = slope; m_slope[1] = -1/slope; m_slope[2] = slope; m_slope[3] = -1/slope
+
+    # The values of the sides of the idealized domain
+    ideal = np.zeros(4)
+    ideal[0] = x_wall; ideal[1] = y_wall; ideal[2] = x_wall; ideal[3] = y_wall
+
+    # Bottom Side
+    lw = 1.5; 
+    n=0; p1_x = p_x0; p1_y = p_y0 
+    p2_xBR, p2_yBR, distBR, diffBR = match_lines(p1_x, p1_y, np.arange(p1_x, search_x[n], 500), m_slope[n], ideal[n])
+    ax.plot([p1_x, p2_xBR], [p1_y, p2_yBR], 'k', linewidth=lw) 
+    
+    # Right Side
+    n=1; p1_x = p2_xBR; p1_y = p2_yBR
+    p2_xTR, p2_yTR, distTR, diffTR = match_lines(p1_x, p1_y, np.arange(p1_x, search_x[n], -500), m_slope[n], ideal[n])
+    ax.plot([p1_x, p2_xTR], [p1_y, p2_yTR], 'k', linewidth=lw) 
+    
+    # Top Side
+    n=2; p1_x = p2_xTR; p1_y = p2_yTR 
+    p2_xTL, p2_yTL, distTL, diffTL = match_lines(p1_x, p1_y, np.arange(p1_x, search_x[n], -500), m_slope[n], ideal[n])
+    ax.plot([p1_x, p2_xTL], [p1_y, p2_yTL], 'k', linewidth=lw) 
+
+    # Left Side
+    n=3; p1_x = p2_xTL; p1_y = p2_yTL
+    p2_xBL, p2_yBL, distBL, diffBL = match_lines(p1_x, p1_y, np.arange(p1_x, search_x[n], 500), m_slope[n], ideal[n])
+    ax.plot([p1_x, p2_xBL], [p1_y, p2_yBL], 'k', linewidth=lw)
+    
+    p2_BR = [round(p2_xBR/500.0)*500.0, round(p2_yBR/500.0)*500.0]
+    p2_TR = [round(p2_xTR/500.0)*500.0, round(p2_yTR/500.0)*500.0]
+    p2_TL = [round(p2_xTL/500.0)*500.0, round(p2_yTL/500.0)*500.0]
+    p2_BL = [round(p2_xBL/500.0)*500.0, round(p2_yBL/500.0)*500.0]
+    
+    corner_lons = []
+    corner_lats = []
+    corner_all = [p2_BR, p2_TR, p2_TL, p2_BL]
+    for i in np.arange(len(corner_all)):
+        corner_lons.append(corner_all[i][0])
+        corner_lats.append(corner_all[i][1])
+    corner_lons, corner_lats
+    
+    return corner_lons, corner_lats, ax
+
+# ------------------------------------------------------------------------------------------------
+
 def step_forward(lat1, lon1, d, brng):
     
     ''' Given a start point, initial bearing, and distance, 
@@ -148,7 +264,7 @@ def calculate_initial_compass_bearing(pointA, pointB):
 
 # ------------------------------------------------------------------------------------------------
 
-def compile_grid_coordinates(nx, ny, lon, lat):
+def create_grid(nx, ny, lon, lat):
     ''' Uses previously defined functions to calculate
     the longitudes and latitudes of all grid cells in
     the domain defined by its two southern corner
@@ -219,28 +335,47 @@ def create_grid_file(filename):
     
 # ------------------------------------------------------------------------------------------------
 
-def transform_coords_geog_stere(lon_g, lat_g):
+def find_dx(lon_g, lat_g):
+    ''' Finds the average distance between 
+    two consecutive points in the grid of
+    coordinates created by the functions above.
+    
+    :arg lon_g: Geographic longitudes
+    :arg lat_g: Geographic latitudes
+    :returns: Distance between points
+    '''
+    
+    dx_start = geo_tools.haversine(lon_g[0,0], lat_g[0,0], lon_g[0,1], lat_g[0,1])
+    dx_end = geo_tools.haversine(lon_g[-1,-2], lat_g[-1,-2], lon_g[-1,-1], lat_g[-1,-1])
+    dx = np.mean([dx_start, dx_end])
+    
+    return dx
+# ------------------------------------------------------------------------------------------------
+
+def transform_coords(lon_orig, lat_orig, transformation):
     
     ''' Convert geographic coordinates of all grid
     points in the domain to stereographic coordinates. 
     
-    :arg lon_g: Geographic longitudes
-    :arg lat_g: Geographic latitudes
-    :returns: Stereographic longitudes and latitudes
+    :arg lon: Original longitudes
+    :arg lat: Original latitudes
+    :returns: Transformed longitudes and latitudes
     '''
     
     # Geographical coordinate system
     proj_geogr = Proj("+init=EPSG:4326")
     
     # IBCAO polar stereographic
-    proj_stere = Proj("+init=EPSG:3996") 
+    proj_stere = Proj("+init=EPSG:3996")
     
-    lon_s =  np.zeros_like(lon_g)
-    lat_s =  np.zeros_like(lat_g)
-    for i in np.arange(lon_g.shape[0]):
-        lon_s[i,:], lat_s[i,:] = transform(proj_geogr, proj_stere, lon_g[i,:], lat_g[i,:])
+    lon_tran =  np.zeros_like(lon_orig)
+    lat_tran =  np.zeros_like(lat_orig)
+    for i in np.arange(lon_orig.shape[0]):
+        if transformation == 'GS':
+            lon_tran[i,:], lat_tran[i,:] = transform(proj_geogr, proj_stere, lon_orig[i,:], lat_orig[i,:])
+        if transformation == 'SG':
+            lon_tran[i,:], lat_tran[i,:] = transform(proj_stere, proj_geogr, lon_orig[i,:], lat_orig[i,:])
     
-    return lon_s, lat_s
+    return lon_tran, lat_tran
 
 # ------------------------------------------------------------------------------------------------
- 
