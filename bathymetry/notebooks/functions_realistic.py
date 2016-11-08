@@ -51,8 +51,8 @@ def rotate_extracted_canyon(lon_s_grid, lat_s_grid, x_region, y_region, z_region
     :returns: Subdomain bathymetry
     '''
     
-    lon_s_grid_rotate = np.fliplr(np.rot90(lon_s_grid, 3))
-    lat_s_grid_rotate = np.fliplr(np.rot90(lat_s_grid, 3))
+    lon_s_grid_rotate = np.fliplr(np.rot90(lon_s_grid, 1))
+    lat_s_grid_rotate = np.fliplr(np.rot90(lat_s_grid, 1))
     
     z_rotated = extract_canyon(lon_s_grid_rotate, lat_s_grid_rotate, x_region, y_region, z_region, interp_method)
     
