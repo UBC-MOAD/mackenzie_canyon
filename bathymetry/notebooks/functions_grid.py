@@ -90,22 +90,18 @@ def match_domain(x_wall, y_wall, search_x, slope=1.1, p_x0 = -1457500.0, p_y0 = 
     lw=1.5; 
     n=0; p1_x = p_x0; p1_y = p_y0 
     p2_xBR, p2_yBR, distBR, diffBR = match_lines(p1_x, p1_y, np.arange(p1_x, search_x[n], 500), m_slope[n], ideal[n])
-    #ax.plot([p1_x, p2_xBR], [p1_y, p2_yBR], 'k', linewidth=lw) 
     
     # Right Side
     n=1; p1_x = p2_xBR; p1_y = p2_yBR
     p2_xTR, p2_yTR, distTR, diffTR = match_lines(p1_x, p1_y, np.arange(p1_x, search_x[n], -500), m_slope[n], ideal[n])
-    #ax.plot([p1_x, p2_xTR], [p1_y, p2_yTR], 'k', linewidth=lw) 
     
     # Top Side
     n=2; p1_x = p2_xTR; p1_y = p2_yTR 
     p2_xTL, p2_yTL, distTL, diffTL = match_lines(p1_x, p1_y, np.arange(p1_x, search_x[n], -500), m_slope[n], ideal[n])
-    #ax.plot([p1_x, p2_xTL], [p1_y, p2_yTL], 'k', linewidth=lw) 
 
     # Left Side
     n=3; p1_x = p2_xTL; p1_y = p2_yTL
     p2_xBL, p2_yBL, distBL, diffBL = match_lines(p1_x, p1_y, np.arange(p1_x, search_x[n], 500), m_slope[n], ideal[n])
-    #ax.plot([p1_x, p2_xBL], [p1_y, p2_yBL], 'k', linewidth=lw)
     
     p2_BR = [round(p2_xBR/500.0)*500.0, round(p2_yBR/500.0)*500.0]
     p2_TR = [round(p2_xTR/500.0)*500.0, round(p2_yTR/500.0)*500.0]
@@ -276,7 +272,7 @@ def create_grid(nx, ny, lon, lat):
     :returns: Longitudes and latitudes of all grid points
     '''
 
-    lat2, lon2 = great_circle_points(lat[-1], lon[-1], lat[0], lon[0], nx)
+    lat2, lon2 = great_circle_points(lat[1], lon[1], lat[2], lon[2], nx)
 
     thelats = np.zeros((nx, ny))
     thelons = np.zeros_like(thelats)
