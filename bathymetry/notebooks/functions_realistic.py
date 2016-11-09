@@ -127,14 +127,19 @@ def flatten_extended_canyon(fluid_depth, extension, lon_s_grid, lat_s_grid, x_re
     z_flattened[z_flattened > 0] = 0
     
     return z_flattened
-
+    
 # -----------------------------------------------------------------------------------------
 
-def positive_canyon(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region, interp_method):
+def match_shape_canyon(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region, interp_method):
     
-    ''' Converts the extracted, rotated, extended,
-    and flattened subdomain into positive values
-    for NEMO.
+    ''' The shape of the canyon bathymetry must be equal
+    to that of the coordinates set. The coordinates set
+    has 3 less rows and columns than the original. 
+    In the x direction, the extension was reduced by 3.
+    In the y direction, the last three rows were simply
+    removed from the extended bathymetry. This will not
+    remove any bathymetric features since that area is
+    already flattened at 1300 m depth.
     
     All values are in IBCAO's Stereographic projection.
     Use cubic interpolation method for the extraction.
@@ -150,11 +155,40 @@ def positive_canyon(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_
     :returns: Subdomain bathymetry
     '''
     
-    z_flattened = flatten_extended_canyon(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region, interp_method)
-    z_positive0 = z_flattened * -1
+    z_flattened = flatten_extended_canyon(fluid_depth, extension - 3, lon_s_grid, lat_s_grid, x_region, y_region, z_region, interp_method)
+    
+    z_shape = z_flattened[:-3,:]
+    
+    return z_shape
+    
+# -----------------------------------------------------------------------------------------    
+
+def positive_canyon(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region, interp_method):
+    
+    ''' Converts the extracted, rotated, extended,
+    flattened, and shaped subdomain into positive 
+    values for NEMO.
+    
+    All values are in IBCAO's Stereographic projection.
+    Use cubic interpolation method for the extraction.
+    
+    :arg fluid_depth: Maximum subdomain depth (positive)
+    :arg extension: Number of grid cells for extrapolation.
+    :arg lon_s_grid: Longitudes of subdomain grid
+    :arg lat_s_grid: Latitudes of subdomain grid
+    :arg x_region: X values of larger dataset
+    :arg y_region: Y values of larger dataset
+    :arg z_region: Bathymetry of larger dataset
+    :arg interp_method: 'nearest', linear', 'cubic'
+    :returns: Subdomain bathymetry
+    '''
+    
+    z_shape = match_shape_canyon(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region, interp_method)
+    
+    z_positive0 = z_shape * -1
     z_positive = np.array(z_positive0, copy=True)
     z_positive[z_positive == -0.] = 0.
     
     return z_positive
-    
+
 # -----------------------------------------------------------------------------------------
