@@ -263,7 +263,18 @@ def create_grid(nx, ny, lon, lat):
     ''' Uses previously defined functions to calculate
     the longitudes and latitudes of all grid cells in
     the domain defined by its two southern corner
-    points.
+    points. Lat and lon 1 and 2 are the two "southern"
+    corner points of the temporary domain defined by
+    match_domain. This function calculates the
+    distance dx between every intermediate point along
+    the great circle bounded by points 1 and 2. This 
+    dx is also used as the distance between intermediate
+    points in the y direction. Therefore, all grid cells
+    are approximately the square and the same size.
+    This implies that the area covered by the grid
+    will depend on the dx and, therefore, nx.
+    
+    I recommend ny = 3/4 * nx.
     
     :arg nx: Grid size (alongshore)
     :arg ny: Grid size (cross-shore)
