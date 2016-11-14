@@ -129,22 +129,21 @@ def canyon_for_model(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y
     z_cyclic[z_cyclic > 0] = 0
     
     z_shape = match_shape(z_cyclic)
+    z_positive = make_positive(z_shape)
     
-    return z_shape
+    return z_positive
     
 # -----------------------------------------------------------------------------------------
 
 def smooth_canyon(max_norm_depth_diff, smooth_factor, fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region):
     
-    z_shape = canyon_for_model(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region)
-    z_positive0 = make_positive(z_shape)
-
-    z_masked0 = np.ma.array(z_positive0)
+    z_positive = canyon_for_model(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region)
+    
+    z_to_smooth = np.array(z_positive, copy=True)
+    z_masked0 = np.ma.array(z_to_smooth)
     z_smoothed = bathy_tools.smooth(z_masked0, max_norm_depth_diff, smooth_factor)
 
-    z_positive = make_positive(z_shape)
     z_original = np.ma.array(z_positive)
-
 
     return z_original, z_smoothed
     
