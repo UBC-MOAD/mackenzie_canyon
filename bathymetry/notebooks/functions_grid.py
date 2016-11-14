@@ -259,7 +259,15 @@ def calculate_initial_compass_bearing(pointA, pointB):
 
 # ------------------------------------------------------------------------------------------------
 
-def create_grid(nx, ny, lon, lat):
+def get_southern_points(lon_corners, lat_corners):
+    
+    lonW, latW = lon_corners[1], lat_corners[1]
+    lonE, latE = lon_corners[2], lat_corners[2]
+    
+    return lonW, latW, lonE, latE
+# ------------------------------------------------------------------------------------------------
+
+def create_grid(nx, ny, lonW, latW, lonE, latE):
     ''' Uses previously defined functions to calculate
     the longitudes and latitudes of all grid cells in
     the domain defined by its two southern corner
@@ -283,7 +291,7 @@ def create_grid(nx, ny, lon, lat):
     :returns: Longitudes and latitudes of all grid points
     '''
 
-    lat2, lon2 = great_circle_points(lat[1], lon[1], lat[2], lon[2], nx)
+    lat2, lon2 = great_circle_points(latW, lonW, latE, lonE, nx)
 
     thelats = np.zeros((nx, ny))
     thelons = np.zeros_like(thelats)
