@@ -3,6 +3,10 @@ import  matplotlib.cm as cm
 import scipy as sc, scipy.io
 import matplotlib.pyplot as plt
 
+
+import warnings
+warnings.filterwarnings("ignore")
+
 def Colormap():
     COLORMAP = """\
     # downloaded from IBCAO homepage
@@ -56,12 +60,11 @@ def Colormap():
     norm     = cm.colors.BoundaryNorm (cmap[:,0], c)
     return (cmap_out, norm)
 
-def def_region():
+def def_region(xl=-1750e3, xr=-1000e3, yb=1300e3, yt=2050e3):   
     ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/IBCAO_V3_500m_RR.grd')
     x_ibcao = ibcao_file.variables['x'][:]
     y_ibcao = ibcao_file.variables['y'][:]
     z_ibcao = ibcao_file.variables['z'][:]
-    xl=-1750e3; xr=-1000e3; yb=1300e3; yt=2050e3
     xmin = np.where(x_ibcao==xl)[0][0]
     xmax = np.where(x_ibcao==xr)[0][0]
     ymin = np.where(y_ibcao==yb)[0][0]
@@ -75,3 +78,53 @@ def plot_region(fig, ax, x_region, y_region, z_region):
     ax.contour(x_region, y_region, z_region, 25, colors='k', linestyles='solid', alpha=0.6)
     ax.contour(x_region, y_region, z_region, levels = [-80, -40.1], colors='k', linestyles='solid', alpha=0.6)
     return fig, ax
+
+
+
+import  os
+import  scipy as sc, scipy.io
+def get_variables(projection):
+    ''' Loads the file for either the Stereographic 
+    or Geographic projection of the Arctic Ocean 
+    (IBCAO) and returns the file's data for x, y,
+    and z. This data can be plotted using the 
+    functions below.
+    
+    Stereographic projection IBCAO_V3_500m_RR.
+    Geographic projection IBCAO_V3_30arcsec_RR.
+    '''
+    if projection == 'S':
+        ibcao_grid_name = 'IBCAO_V3_500m_RR.grd'
+    elif projection == 'G':
+        ibcao_grid_name = 'IBCAO_V3_30arcsec_RR.grd'
+    ibcao_grid_dir = '/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid'
+    ibcao_grid = os.path.join(ibcao_grid_dir, ibcao_grid_name)
+    ibcao_nc = scipy.io.netcdf_file (ibcao_grid)
+
+    x = ibcao_nc.variables['x'][:]
+    y = ibcao_nc.variables['y'][:]
+    z = ibcao_nc.variables['z'][:]
+    return x, y, z
+
+def return_boundariesG(x, y, z, xl, xr, yb, yt, case):
+    ''' Uses the x, y, and z values from get_variables
+    which represent the entire Arctic bathymetry 
+    available and extracts a specified region given
+    xleft, xright, ybottom, and ytop or a pre-arranged
+    case. It returns the xn, yn, and zn of the region.
+    
+    Geographic projection IBCAO_V3_30arcsec_RR.
+    '''
+    if case == 'region':
+        xl=-145; xr=-133; yb=68.6; yt=72.5
+    elif case == None:
+        xl=xl; xr=xr; yb=yb; yt=yt
+        
+    xmin = np.where(np.round(x,2)==xl)[0][0]
+    xmax = np.where(np.round(x,2)==xr)[0][0]
+    ymin = np.where(np.round(y,2)==yb)[0][0]
+    ymax = np.where(np.round(y,2)==yt)[0][0]
+    xn = x[xmin:xmax]
+    yn = y[ymin:ymax]
+    zn = z[ymin:ymax, xmin:xmax]
+    return xn, yn, zn
