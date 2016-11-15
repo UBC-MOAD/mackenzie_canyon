@@ -1,5 +1,7 @@
 import  numpy as np
 import  matplotlib.cm as cm
+import scipy as sc, scipy.io
+import matplotlib.pyplot as plt
 
 def Colormap():
     COLORMAP = """\
@@ -53,3 +55,23 @@ def Colormap():
     cmap_out = cm.colors.ListedColormap (cmap[:,1:4], 'ibcao', c)
     norm     = cm.colors.BoundaryNorm (cmap[:,0], c)
     return (cmap_out, norm)
+
+def def_region():
+    ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/IBCAO_V3_500m_RR.grd')
+    x_ibcao = ibcao_file.variables['x'][:]
+    y_ibcao = ibcao_file.variables['y'][:]
+    z_ibcao = ibcao_file.variables['z'][:]
+    xl=-1750e3; xr=-1000e3; yb=1300e3; yt=2050e3
+    xmin = np.where(x_ibcao==xl)[0][0]
+    xmax = np.where(x_ibcao==xr)[0][0]
+    ymin = np.where(y_ibcao==yb)[0][0]
+    ymax = np.where(y_ibcao==yt)[0][0]
+    x_region = x_ibcao[xmin:xmax]
+    y_region = y_ibcao[ymin:ymax]
+    z_region = z_ibcao[ymin:ymax, xmin:xmax]
+    return x_region, y_region, z_region
+    
+def plot_region(fig, ax):
+    ax.contour(x_region, y_region, z_region, 25, colors='k', linestyles='solid', alpha=0.6)
+    ax.contour(x_region, y_region, z_region, levels = [-80, -40.1], colors='k', linestyles='solid', alpha=0.6)
+    return fig, ax
