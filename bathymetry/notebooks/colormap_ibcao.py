@@ -71,7 +71,7 @@ def def_region():
     z_region = z_ibcao[ymin:ymax, xmin:xmax]
     return x_region, y_region, z_region
     
-def plot_region(fig, ax):
+def plot_region(fig, ax, x_region, y_region, z_region):
     ax.contour(x_region, y_region, z_region, 25, colors='k', linestyles='solid', alpha=0.6)
     ax.contour(x_region, y_region, z_region, levels = [-80, -40.1], colors='k', linestyles='solid', alpha=0.6)
     return fig, ax
