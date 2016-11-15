@@ -230,8 +230,9 @@ def make_topo_smooth(y, y_base, y_break, y_head, y_coast, cR, L,
     for j in np.arange(len(x)):
         topography[:,j] = (slope_profile - canyondepth * 
                            (1.0 / (np.cosh(0.5 / width_profile * (x[j] - (0.5 * x_wall))))**50))
-    #topography=np.transpose(topography)
+    #topography = np.transpose(topography)
     topo = -1* topography[0:-1, :]
+    topo = np.fliplr(np.rot90(topo, 2))
    
     return topo
 
