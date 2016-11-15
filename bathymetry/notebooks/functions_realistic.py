@@ -25,17 +25,20 @@ def extract_canyon(lon_s_grid, lat_s_grid, x_region, y_region, z_region):
     :returns: Subdomain bathymetry
     '''
     
+    lon_s_grid_rotate = np.fliplr(np.rot90(lon_s_grid, 3))
+    lat_s_grid_rotate = np.fliplr(np.rot90(lat_s_grid, 3))
+
     X_region, Y_region = np.meshgrid(x_region, y_region) 
     points = np.c_[np.ravel(X_region), np.ravel(Y_region)]
     values = np.ravel(z_region)
 
-    z_canyon = griddata(points, values, (lon_s_grid, lat_s_grid), method = 'cubic')
+    z_canyon = griddata(points, values, (lon_s_grid_rotate, lat_s_grid_rotate), method = 'cubic')
     
     return z_canyon
 
 # -----------------------------------------------------------------------------------------
 
-def cyclic_canyon(extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region):
+def cyclic_canyon_extend(extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region):
     
     ''' Extracts the bathymetric subdomain, 
     flips and rotates it by 270 deg, and extrapolates 
@@ -52,9 +55,6 @@ def cyclic_canyon(extension, lon_s_grid, lat_s_grid, x_region, y_region, z_regio
     :returns: Subdomain bathymetry
     '''
     
-    lon_s_grid_rotate = np.fliplr(np.rot90(lon_s_grid, 3))
-    lat_s_grid_rotate = np.fliplr(np.rot90(lat_s_grid, 3))
-    
     z_rotated = extract_canyon(lon_s_grid_rotate, lat_s_grid_rotate, x_region, y_region, z_region)
     
     x_extended = np.arange(z_rotated.shape[1] + extension)
@@ -62,6 +62,43 @@ def cyclic_canyon(extension, lon_s_grid, lat_s_grid, x_region, y_region, z_regio
     y_original = np.arange(z_rotated.shape[0])
     z_original = np.concatenate([z_rotated, z_rotated[:,:1]], axis=1)
     
+    X_original, Y_original = np.meshgrid(x_original, y_original)
+    points = np.c_[np.ravel(X_original), np.ravel(Y_original)]
+    values = np.ravel(z_original)
+
+    X_extended, Y_extended = np.meshgrid(x_extended, y_original)
+
+    z_cyclic = griddata(points, values, (X_extended, Y_extended), method = 'linear')
+    
+    return z_cyclic
+
+# -----------------------------------------------------------------------------------------
+
+def cyclic_canyon_truncate(index, lon_s_grid, lat_s_grid, x_region, y_region, z_region):
+    
+    ''' Extracts the bathymetric subdomain, 
+    flips and rotates it by 270 deg, and extrapolates 
+    so that the end column looks like the start. 
+    This is to facilitate periodic boundaries.
+    
+    :arg extension: Number of grid cells for extrapolation.
+    :arg lon_s_grid: Longitudes of subdomain grid
+    :arg lat_s_grid: Latitudes of subdomain grid
+    :arg x_region: X values of larger dataset
+    :arg y_region: Y values of larger dataset
+    :arg z_region: Bathymetry of larger dataset
+    :arg interp_method: 'nearest', linear', 'cubic'
+    :returns: Subdomain bathymetry
+    '''
+    
+    z_rotated = extract_canyon(lon_s_grid, lat_s_grid, x_region, y_region, z_region)
+
+    x_original = np.zeros(z_rotated.shape[1]-index+1)
+    x_original[1:] = np.arange(index, z_rotated.shape[1])
+    x_extended = np.arange(z_rotated.shape[1])
+    y_original = np.arange(z_rotated.shape[0])
+    z_original = np.concatenate([z_rotated[:,-1:], z_rotated[:,index:]], axis=1)
+
     X_original, Y_original = np.meshgrid(x_original, y_original)
     points = np.c_[np.ravel(X_original), np.ravel(Y_original)]
     values = np.ravel(z_original)
@@ -85,7 +122,7 @@ def match_shape(bathymetry):
     already flattened at 1300 m depth.
     '''
     
-    bathy = bathymetry[:-3,:]
+    bathy = bathymetry[:-3,:-3]
     
     return bathy
     
@@ -105,7 +142,7 @@ def make_positive(bathymetry):
 
 # -----------------------------------------------------------------------------------------
 
-def canyon_for_model(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region):
+def canyon_for_model(fluid_depth, index, lon_s_grid, lat_s_grid, x_region, y_region, z_region):
     
     ''' Limits bathymetry values from 0 m to the
     fluid depth, fixes the bathymetry array shape, 
@@ -123,7 +160,8 @@ def canyon_for_model(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y
     :returns: Subdomain bathymetry
     '''
     
-    z_cyclic = cyclic_canyon(extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region)
+    #z_cyclic = cyclic_canyon(extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region)
+    z_cyclic = cyclic_canyon_truncate(index, lon_s_grid, lat_s_grid, x_region, y_region, z_region)
 
     z_cyclic[z_cyclic < -fluid_depth] = -fluid_depth
     z_cyclic[z_cyclic > 0] = 0
@@ -135,9 +173,9 @@ def canyon_for_model(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y
     
 # -----------------------------------------------------------------------------------------
 
-def smooth_canyon(max_norm_depth_diff, smooth_factor, fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region):
+def smooth_canyon(max_norm_depth_diff, smooth_factor, fluid_depth, index, lon_s_grid, lat_s_grid, x_region, y_region, z_region):
     
-    z_positive = canyon_for_model(fluid_depth, extension, lon_s_grid, lat_s_grid, x_region, y_region, z_region)
+    z_positive = canyon_for_model(fluid_depth, index, lon_s_grid, lat_s_grid, x_region, y_region, z_region)
     
     z_to_smooth = np.array(z_positive, copy=True)
     z_masked0 = np.ma.array(z_to_smooth)
