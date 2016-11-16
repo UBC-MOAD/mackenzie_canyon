@@ -34,13 +34,13 @@ def get_variables(projection):
 
 #--------------------------------------------------------------------------------------
 
-def def_regionG(xl=-145; xr=-133; yb=68.6; yt=72.5):
+def def_regionG(xl=-145, xr=-133, yb=68.6, yt=72.5):
     ''' Returns an extract of the complete IBCAO bathymetric
     grid using xl, xr, yb, and yt, which correpond to the left,
     right, bottom, and top boundaries when plotted.
     '''
     
-    ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/IBCAO_V3_30arcsec_RR.grd'')
+    ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/IBCAO_V3_30arcsec_RR.grd')
     x_ibcao = ibcao_file.variables['x'][:]
     y_ibcao = ibcao_file.variables['y'][:]
     z_ibcao = ibcao_file.variables['z'][:]     
