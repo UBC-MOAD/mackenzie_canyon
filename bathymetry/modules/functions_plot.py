@@ -41,9 +41,9 @@ def def_regionG(xl=-145, xr=-133, yb=68.6, yt=72.5):
     '''
     
     ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/IBCAO_V3_30arcsec_RR.grd')
-    x_ibcao = ibcao_file.variables['x'][:]
-    y_ibcao = ibcao_file.variables['y'][:]
-    z_ibcao = ibcao_file.variables['z'][:]     
+    x = ibcao_file.variables['x'][:]
+    y = ibcao_file.variables['y'][:]
+    z = ibcao_file.variables['z'][:]     
     xmin = np.where(np.round(x,2)==xl)[0][0]
     xmax = np.where(np.round(x,2)==xr)[0][0]
     ymin = np.where(np.round(y,2)==yb)[0][0]
@@ -62,9 +62,9 @@ def def_regionS(xl=-1750e3, xr=-1000e3, yb=1300e3, yt=2050e3):
     '''
     
     ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/IBCAO_V3_500m_RR.grd')
-    x_ibcao = ibcao_file.variables['x'][:]
-    y_ibcao = ibcao_file.variables['y'][:]
-    z_ibcao = ibcao_file.variables['z'][:]
+    x = ibcao_file.variables['x'][:]
+    y = ibcao_file.variables['y'][:]
+    z = ibcao_file.variables['z'][:]
     xmin = np.where(x_ibcao==xl)[0][0]
     xmax = np.where(x_ibcao==xr)[0][0]
     ymin = np.where(y_ibcao==yb)[0][0]
