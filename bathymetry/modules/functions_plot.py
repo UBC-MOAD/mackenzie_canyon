@@ -10,12 +10,12 @@ warnings.filterwarnings("ignore")
 #--------------------------------------------------------------------------------------
 
 def get_variables(projection):
-    ''' Loads the file for either the Stereographic 
-    or Geographic projection of the Arctic Ocean 
+    ''' Loads the file for either the Stereographic
+    or Geographic projection of the Arctic Ocean
     (IBCAO) and returns the file's data for x, y,
-    and z. This data can be plotted using the 
+    and z. This data can be plotted using the
     functions below.
-    
+
     Stereographic projection IBCAO_V3_500m_RR.
     Geographic projection IBCAO_V3_30arcsec_RR.
     '''
@@ -39,11 +39,11 @@ def def_regionG(xl=-145, xr=-133, yb=68.6, yt=72.5):
     grid using xl, xr, yb, and yt, which correpond to the left,
     right, bottom, and top boundaries when plotted.
     '''
-    
+
     ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/IBCAO_V3_30arcsec_RR.grd')
     x = ibcao_file.variables['x'][:]
     y = ibcao_file.variables['y'][:]
-    z = ibcao_file.variables['z'][:]     
+    z = ibcao_file.variables['z'][:]
     xmin = np.where(np.round(x,2)==xl)[0][0]
     xmax = np.where(np.round(x,2)==xr)[0][0]
     ymin = np.where(np.round(y,2)==yb)[0][0]
@@ -55,23 +55,23 @@ def def_regionG(xl=-145, xr=-133, yb=68.6, yt=72.5):
 
 #--------------------------------------------------------------------------------------
 
-def def_regionS(xl=-1750e3, xr=-1000e3, yb=1300e3, yt=2050e3):   
+def def_regionS(xl=-1750e3, xr=-1000e3, yb=1300e3, yt=2050e3):
     ''' Returns an extract of the complete IBCAO bathymetric
     grid using xl, xr, yb, and yt, which correpond to the left,
     right, bottom, and top boundaries when plotted.
     '''
-    
+
     ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/IBCAO_V3_500m_RR.grd')
     x = ibcao_file.variables['x'][:]
     y = ibcao_file.variables['y'][:]
     z = ibcao_file.variables['z'][:]
-    xmin = np.where(x_ibcao==xl)[0][0]
-    xmax = np.where(x_ibcao==xr)[0][0]
-    ymin = np.where(y_ibcao==yb)[0][0]
-    ymax = np.where(y_ibcao==yt)[0][0]
-    x_region = x_ibcao[xmin:xmax]
-    y_region = y_ibcao[ymin:ymax]
-    z_region = z_ibcao[ymin:ymax, xmin:xmax]
+    xmin = np.where(x==xl)[0][0]
+    xmax = np.where(x==xr)[0][0]
+    ymin = np.where(y==yb)[0][0]
+    ymax = np.where(y==yt)[0][0]
+    x_region = x[xmin:xmax]
+    y_region = y[ymin:ymax]
+    z_region = z[ymin:ymax, xmin:xmax]
     return x_region, y_region, z_region
 
 #--------------------------------------------------------------------------------------
@@ -130,7 +130,7 @@ def Colormap():
     return (cmap_out, norm)
 
 #--------------------------------------------------------------------------------------
-   
+
 def plot_region(fig, ax, x_region, y_region, z_region):
     ax.contour(x_region, y_region, z_region, 25, colors='k', linestyles='solid', alpha=0.6)
     ax.contour(x_region, y_region, z_region, levels = [-80, -40.1], colors='k', linestyles='solid', alpha=0.6)
