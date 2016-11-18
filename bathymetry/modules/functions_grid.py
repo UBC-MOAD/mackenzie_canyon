@@ -317,40 +317,7 @@ def create_grid(nx, ny, lonW, latW, lonE, latE):
     print(dx2)
 
     return thelons, thelats
-
-# ------------------------------------------------------------------------------------------------
-
-def create_grid_file(filename):
-    ''' This function saves the coordinates for all
-    points in the defined grid. This grid will then 
-    be processed to calculate the scaling factors
-    required by NEMO.
-    
-    :arg filename: Directory and name of netCDF4 file
-    '''
-    
-    dataset = Dataset(filename, 'w')
-    x = dataset.createDimension('x', nx)
-    y = dataset.createDimension('y', ny)
-
-    lons = dataset.createVariable('grid_lons', 'f8', ('x','y'))
-    lats = dataset.createVariable('grid_lats', 'f8', ('x','y'))
-
-    dataset.title = 'Mackenzie Canyon Coordinates Grid'
-    dataset.author = 'Idalia A. Machuca'
-    dataset.institution = 'Dept of Earth, Ocean & Atmospheric Sciences, University of British Columbia'
-    dataset.source = 'bitbucket.org/CanyonsUBC/mackenzie_canyon/bathymetry/notebooks/'
-    dataset.timeStamp = time.ctime(time.time())
-    lons.standard_name = 'Longitude'
-    lats.standard_name = 'Latitude'
-    lons.units = 'degrees east'
-    lons.units = 'degrees north'
-
-    lons[:] = thelons[:]
-    lats[:] = thelats[:]
-
-    dataset.close()
-    
+   
 # ------------------------------------------------------------------------------------------------
 
 def find_dx(lon_g, lat_g):
@@ -396,5 +363,40 @@ def transform_coords(lon_orig, lat_orig, transformation):
                 lon_tran[i,j], lat_tran[i,j] = transform(proj_stere, proj_geogr, lon_orig[i,j], lat_orig[i,j])
     
     return lon_tran, lat_tran
+
+# ------------------------------------------------------------------------------------------------
+
+def create_grid_file(nx, ny, thelons, thelats, filename, title, description, ipynbname):
+    ''' This function saves the coordinates for all
+    points in the defined grid. This grid will then 
+    be processed to calculate the scaling factors
+    required by NEMO.
+    
+    :arg filename: Directory and name of netCDF4 file
+    '''
+    
+    directory = '/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/initial_sets/grid/'
+    dataset = Dataset(directory + filename, 'w')
+    x = dataset.createDimension('x', nx)
+    y = dataset.createDimension('y', ny)
+
+    lons = dataset.createVariable('grid_lons', 'f8', ('x','y'))
+    lats = dataset.createVariable('grid_lats', 'f8', ('x','y'))
+
+    dataset.title = title
+    dataset.author = 'Idalia A. Machuca'
+    dataset.institution = 'Dept of Earth, Ocean & Atmospheric Sciences, University of British Columbia'
+    dataset.source = 'bitbucket.org/CanyonsUBC/mackenzie_canyon/bathymetry/notebooks/' + ipynbname
+    dataset.description = description
+    dataset.timeStamp = time.ctime(time.time())
+    lons.standard_name = 'Longitude'
+    lats.standard_name = 'Latitude'
+    lons.units = 'degrees east'
+    lons.units = 'degrees north'
+
+    lons[:] = thelons[:]
+    lats[:] = thelats[:]
+
+    dataset.close()
 
 # ------------------------------------------------------------------------------------------------

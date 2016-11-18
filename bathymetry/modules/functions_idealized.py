@@ -238,7 +238,7 @@ def make_topo_smooth(y, y_base, y_break, y_head, y_coast, cR, L,
 
 # ------------------------------------------------------------------------------------
 
-def create_bathy_file(X, Y, bathymetry, filename, title, description):
+def create_bathy_file(X, Y, bathymetry, filename, title, description, ipynbname):
     
     ''' This function creates a netCDF4 file for
     the canyon bathymetry given the filename and 
@@ -250,9 +250,11 @@ def create_bathy_file(X, Y, bathymetry, filename, title, description):
     :arg filename: Directory and name of netcdf file
     :arg title: Title of bathymetry version
     :arg description: Details about bathymetry version
+    :arg ipynbname: Name of source ipython notebook
     '''
     
-    dataset = Dataset(filename, 'w')
+    directory = '/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/initial_sets/idealized/'
+    dataset = Dataset(directory + filename, 'w')
     file_x = dataset.createDimension('x', X.shape[1])
     file_y = dataset.createDimension('y', X.shape[0])
 
@@ -263,7 +265,7 @@ def create_bathy_file(X, Y, bathymetry, filename, title, description):
     dataset.title = title
     dataset.author = 'Idalia A. Machuca'
     dataset.institution = 'Dept of Earth, Ocean & Atmospheric Sciences, University of British Columbia'
-    dataset.source = 'bitbucket.org/CanyonsUBC/mackenzie_canyon/bathymetry/notebooks/make_mackenzie.ipynb'
+    dataset.source = 'bitbucket.org/CanyonsUBC/mackenzie_canyon/bathymetry/notebooks/' + ipynbname
     dataset.description = description
     dataset.timeStamp = time.ctime(time.time())
     file_X.standard_name = 'Along-Shore Distance'
