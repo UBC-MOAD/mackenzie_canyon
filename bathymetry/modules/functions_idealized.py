@@ -5,6 +5,7 @@
 import numpy as np
 from netCDF4 import Dataset
 import time
+import functions_grid
 
 def base_measurements():
     x_wall, y_wall = 438772.15043801494, 325034.36404318013
