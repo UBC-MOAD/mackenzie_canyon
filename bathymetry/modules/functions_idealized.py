@@ -6,46 +6,45 @@ import numpy as np
 from netCDF4 import Dataset
 import time
 
-def define_Mackenzie_measurements():
+def define_Mackenzie_measurements(x_wall, y_wall):
     
     ''' This function defines all measurements made
     for Mackenzie Canyon that are used to create 
     the idealized bathymetry profile.
     '''
     
+    # Distances
+    wall_coast = 26627.0539114
+    wall_head = 48259.7140481
+    wall_paral = 167520.894219
+    wall_base = 174731.93755
+    L = 93744.3331621
+    
     # Alongshore
     w_break = 62681.735776859277  
     w_mid = 46456.969337226466  
     w_head = 14142.13562373095 
     width_f = 62681.735776859277
-    x_wall = width_f * 7
-
-    # Adjustments
-    mouth = 51865.209919559762
-    length = 74607.305272339116
-    y_wall_1300 = 174731.93755006552
-    y_wall = (mouth + length) * 2.57
-    adjust = y_wall - y_wall_1300
 
     # Cross-shore
-    cR = 9246.0
-    L = 93744.0     
-    y_base = np.mean([16500.0,7000.0]) + adjust 
-    y_break = np.mean([38000.0, 57500.0]) + adjust 
-    y_coast = 148105.0 + adjust 
-    y_head = y_break + L
-
+    cR = 9246.0  
+    y_coast = y_wall - wall_coast
+    y_head = y_wall - wall_head
+    y_break = (y_wall - wall_head) - L
+    y_paral = y_wall - wall_paral
+    y_base = y_wall - wall_base
+    
     # Depths
+    p = 4.0
     fluid_depth = 1300.0
     z_bottom = fluid_depth - fluid_depth
+    z_paral = 825
     z_break = fluid_depth - 80.0
     z_wall = fluid_depth - 40.0 
-    p = 4.0
     
-    return w_break, w_mid, w_head, width_f, x_wall,\
-            mouth, length, y_wall_1300, y_wall, adjust,\
-            cR, L, y_base, y_break, y_coast, y_head,\
-            fluid_depth, z_bottom, z_break, z_wall, p
+    return x_wall, y_wall, w_break, w_mid, w_head, width_f,\
+    cR, L, y_coast, y_head, y_break, y_paral, y_base,\
+    fluid_depth, z_bottom, z_paral, z_break, z_wall, p
 
 # ------------------------------------------------------------------------------------
 
@@ -112,15 +111,19 @@ def tanktopo(y, y_base, y_break, y_coast,
 
 # ------------------------------------------------------------------------------------
 
-def canyontopo(y, y_base, y_break, y_head, y_coast,
-               fluid_depth, z_bottom, z_break, z_wall):
+def canyontopo(y, y_base, y_paral, y_break, y_head, y_coast,
+               fluid_depth, z_bottom, z_paral, z_break, z_wall):
     
     ''' This function generates the topographical profile for the canyon along
     its axis (cross-shore direction). Similar to tanktopo, the profile is
     formed using a collection of lines.
     '''
     
-    slc_L = (z_break - z_bottom) / (y_head - y_base)
+    #changed
+    slc_paral = (z_paral - z_bottom) / (y_paral - y_base)
+    slc_break = (z_break - z_paral) / (y_head - y_paral)
+    
+    #unchanged
     slc_ct = (z_wall - z_break) / (y_coast - y_head)
     topo_cp = np.zeros(len(y))
     canyon_profile = np.zeros(len(y))
@@ -129,9 +132,12 @@ def canyontopo(y, y_base, y_break, y_head, y_coast,
         
         if y[ii] <= y_base:
             topo_cp[ii] = z_bottom
+            
+        elif y[ii] > y_base and y[ii] <= y_paral:
+            topo_cp[ii] = (slc_paral * y[ii]) - (slc_paral * y_base) + z_bottom
         
-        elif y[ii] > y_base and y[ii] <= y_head:
-            topo_cp[ii] = (slc_L * y[ii]) - (slc_L * y_base) + z_bottom
+        elif y[ii] > y_paral and y[ii] <= y_head:
+            topo_cp[ii] = (slc_break * y[ii]) - (slc_break * y_paral) + z_paral
                     
         elif y[ii] > y_head and y[ii] <= y_coast :      
             topo_cp[ii] = (slc_ct * y[ii]) - (slc_ct * y_head) + z_break
@@ -182,9 +188,9 @@ def widthprofile(y, y_base, y_break, y_head, y_coast, cR, L,
 
 # ------------------------------------------------------------------------------------
 
-def make_topo_smooth(y, y_base, y_break, y_head, y_coast, cR, L,
+def make_topo_smooth(y, y_base, y_paral, y_break, y_head, y_coast, cR, L,
                      x, x_wall, w_break, w_mid, w_head, p,
-                     fluid_depth, z_bottom, z_break, z_wall):
+                     fluid_depth, z_bottom, z_paral, z_break, z_wall):
     
     ''' This function returns the depth field of the continental slope and
     shelf with a sech-shaped canyon. It uses the functions tanktopo,
@@ -192,6 +198,7 @@ def make_topo_smooth(y, y_base, y_break, y_head, y_coast, cR, L,
     
     :arg y: Array of cross-shore distances
     :arg y_base: Distance to the base of the continental slope
+    :arg y_paral: Distance to where isobaths start bending into canyon
     :arg y_break: Distance to the shelf break
     :arg y_head: Distance to the canyon head
     :arg y_coast: Distance beyond y_head where shelf flattens
@@ -204,6 +211,7 @@ def make_topo_smooth(y, y_base, y_break, y_head, y_coast, cR, L,
     :arg p: Geometric parameter used to help shape of canyon
     :arg fluid_depth: Total height of the fluid in the domain.
     :arg z_bottom: Depth of the deep ocean (measured upward)
+    :arg z_paral: Depth of first isobath bending into canyon
     :arg z_break: Depth of the shelf break (measured upward)
     :arg z_wall: Depth of shelf beyond y_coast (measured upward)
     '''
@@ -212,9 +220,8 @@ def make_topo_smooth(y, y_base, y_break, y_head, y_coast, cR, L,
     slope_profile = tanktopo(y, y_base, y_break, y_coast,
                              fluid_depth, z_bottom, z_break, z_wall)
     
-    # Slope of the canyon
-    canyon_profile = canyontopo(y, y_base, y_break, y_head, y_coast,
-                                fluid_depth, z_bottom, z_break, z_wall)
+    canyon_profile = canyontopo(y, y_base, y_paral, y_break, y_head, y_coast,
+               fluid_depth, z_bottom, z_paral, z_break, z_wall)
   
     # Slope of the canyon as well as the shape
     width_profile = widthprofile(y, y_base, y_break, y_head, y_coast, cR, L,
@@ -230,7 +237,6 @@ def make_topo_smooth(y, y_base, y_break, y_head, y_coast, cR, L,
     for j in np.arange(len(x)):
         topography[:,j] = (slope_profile - canyondepth * 
                            (1.0 / (np.cosh(0.5 / width_profile * (x[j] - (0.5 * x_wall))))**50))
-    #topography = np.transpose(topography)
     topo = -1* topography[0:-1, :]
     topo = np.fliplr(np.rot90(topo, 2))
    
