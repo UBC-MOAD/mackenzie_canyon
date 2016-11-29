@@ -6,7 +6,20 @@ import numpy as np
 from netCDF4 import Dataset
 import time
 
-def define_Mackenzie_measurements(x_wall, y_wall):
+def base_measurements():
+    x_wall, y_wall = 438772.15043801494, 325034.36404318013
+    fluid_depth = 1300.0
+    return x_wall, y_wall, fluid_depth
+
+def extended_measurements(lon_s_grid, lat_s_grid):
+    p_NE = [lon_s_grid[-1,-1], lat_s_grid[-1,-1]]
+    p_SE = [lon_s_grid[-1,0], lat_s_grid[-1,0]]
+    p_SW = [lon_s_grid[0,0], lat_s_grid[0,0]]
+    x_wall = functions_grid.find_distance(p_SW, p_SE)
+    y_wall = functions_grid.find_distance(p_NE, p_SE)
+    return x_wall, y_wall
+
+def Mackenzie_measurements(x_wall, y_wall):
     
     ''' This function defines all measurements made
     for Mackenzie Canyon that are used to create 
