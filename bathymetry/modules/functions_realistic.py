@@ -5,6 +5,8 @@
 
 # Imports
 import numpy as np
+import time
+from netCDF4 import Dataset
 from scipy.interpolate import griddata
 from salishsea_tools import bathy_tools
 
@@ -184,5 +186,43 @@ def smooth_canyon(max_norm_depth_diff, smooth_factor, fluid_depth, index, lon_s_
     z_original = np.ma.array(z_positive)
 
     return z_original, z_smoothed
+    
+# -----------------------------------------------------------------------------------------
+
+def create_bathy_file(bathymetry, filename, title, description, ipynbname):
+    
+    ''' This function creates a netCDF4 file for
+    the canyon bathymetry given the filename and 
+    the x and y grid cell number.
+    
+    :arg X: Alongshore indices (from set_domain_grid)
+    :arg Y: Cross-shore indices (from set_domain_grid)
+    :arg bathymetry: Canyon bathymetry (from make_topo_smooth)
+    :arg filename: Directory and name of netcdf file
+    :arg title: Title of bathymetry version
+    :arg description: Details about bathymetry version
+    :arg ipynbname: Name of source ipython notebook
+    '''
+    
+    directory = '/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/initial_sets/realistic/'
+    dataset = Dataset(directory + filename, 'w')
+    file_x = dataset.createDimension('x', bathymetry.shape[1])
+    file_y = dataset.createDimension('y', bathymetry.shape[0])
+
+    Bathymetry = dataset.createVariable('Bathymetry', 'f8', ('y','x'))
+
+    dataset.title = title
+    dataset.author = 'Idalia A. Machuca'
+    dataset.institution = 'Dept of Earth, Ocean & Atmospheric Sciences, University of British Columbia'
+    dataset.source = 'bitbucket.org/CanyonsUBC/mackenzie_canyon/bathymetry/notebooks/' + ipynbname
+    dataset.description = description
+    dataset.timeStamp = time.ctime(time.time())
+    Bathymetry.standard_name = 'Bathymetry'
+    Bathymetry.units = 'm'
+    Bathymetry.positive = 'upward'
+
+    Bathymetry[:] = bathymetry[:]
+
+    dataset.close()
     
 # -----------------------------------------------------------------------------------------
