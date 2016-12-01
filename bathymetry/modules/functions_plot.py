@@ -140,6 +140,12 @@ def plot_region(fig, ax, x_region, y_region, z_region):
 
 #--------------------------------------------------------------------------------------
 
+def mask_output(var):
+    var_m = np.ma.masked_values(var, 0)
+    return var_m
+
+#--------------------------------------------------------------------------------------
+
 def load_model_output(path, cfg):
     ''' This function is used to load the important
     variables stored in the different output files
@@ -155,10 +161,10 @@ def load_model_output(path, cfg):
 
     lon = gridT.variables['nav_lon']
     lat = gridT.variables['nav_lat']
-    tem = gridT.variables['votemper']
-    sal = gridT.variables['vosaline']
-    ssh = gridT.variables['sossheig']
-    U = gridU.variables['vozocrtx']
-    V = gridV.variables['vomecrty']
-    W = gridW.variables['vovecrtz']
+    tem = mask_output(gridT.variables['votemper'])
+    sal = mask_output(gridT.variables['vosaline'])
+    ssh = mask_output(gridT.variables['sossheig'])
+    U = mask_output(gridU.variables['vozocrtx'])
+    V = mask_output(gridV.variables['vomecrty'])
+    W = mask_output(gridW.variables['vovecrtz'])
     return gridT, lon, lat, tem, sal, ssh, U, V, W
