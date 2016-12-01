@@ -1,6 +1,8 @@
 import  numpy as np
+import netCDF4 as nc
 import  matplotlib.cm as cm
 import  os
+import glob
 import scipy as sc, scipy.io
 import matplotlib.pyplot as plt
 import warnings
@@ -135,3 +137,28 @@ def plot_region(fig, ax, x_region, y_region, z_region):
     ax.contour(x_region, y_region, z_region, 25, colors='k', linestyles='solid', alpha=0.6)
     ax.contour(x_region, y_region, z_region, levels = [-80, -40.1], colors='k', linestyles='solid', alpha=0.6)
     return fig, ax
+
+#--------------------------------------------------------------------------------------
+
+def load_model_output(path, cfg):
+    ''' This function is used to load the important
+    variables stored in the different output files
+    produced by a NEMO run. The path ends at the CONFIG
+    directory while the cfg path starts at the specific
+    configuration directory and ends in the final directory
+    without a slash.
+    '''
+    gridT = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_T.nc')[0])
+    gridU = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_U.nc')[0])
+    gridV = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_V.nc')[0])
+    gridW = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_W.nc')[0])
+
+    lon = gridT.variables['nav_lon']
+    lat = gridT.variables['nav_lat']
+    tem = gridT.variables['votemper']
+    sal = gridT.variables['vosaline']
+    ssh = gridT.variables['sossheig']
+    U = gridU.variables['vozocrtx']
+    V = gridV.variables['vomecrty']
+    W = gridW.variables['vovecrtz']
+    return gridT, lon, lat, tem, sal, ssh, U, V, W
