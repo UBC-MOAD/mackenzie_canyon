@@ -31,10 +31,12 @@ display('Compute_ScalingFactors.m is a revision of compute_grid_and_scaling_fact
 fileout = ('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/initial_sets/coordinates/coords_01.nc');
 infile = ('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/initial_sets/grid/grid_01.nc')
 
-lon_T = ncread(infile, 'grid_lons');
-lat_T = ncread(infile, 'grid_lats');
+% I added this transpose as a quick fix
+lon_T = transpose(ncread(infile, 'grid_lons'));
+lat_T = transpose(ncread(infile, 'grid_lats'));
 
 [dimx,dimy]=size(lon_T);
+%%
 
 lat_u=NaN(dimx,dimy)    ;   lon_u=NaN(dimx,dimy);
 lat_v=NaN(dimx,dimy)    ;   lon_v=NaN(dimx,dimy);
