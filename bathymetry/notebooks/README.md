@@ -30,9 +30,9 @@ Descriptions under the links below are from the first cell of the notebooks
     
     May: Details about the coordinates file used the NEMO.  
 
-* ##[gyre_runs_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_runs_mackenzie.ipynb)  
+* ##[gyre_runs_mackenzie01.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_runs_mackenzie01.ipynb)  
     
-    October: Part 2 - This notebook is a continuation of gyre_runs.ipynb, with specific interest in Mackenzie Canyon runs.  
+    October: Part 2 - This notebook is a continuation of gyre_runs.ipynb, with specific interest in Mackenzie Canyon runs. The configuration used to produce these results is gyre_mackenzie01.  
 
 * ##[rough_bathy2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/rough_bathy2.ipynb)  
     
@@ -41,6 +41,10 @@ Descriptions under the links below are from the first cell of the notebooks
 * ##[room_of_requirement.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/room_of_requirement.ipynb)  
     
     Snippets.  
+
+* ##[gyre_runs_mackenzie02.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_runs_mackenzie02.ipynb)  
+    
+    November: Part 3 - This notebook is a continuation of gyre_runs.ipynb and gyre_runs_mackenzie01. It uses the bathymetries and grid created in final_bathymetry.ipynb. The configuration used to produce these results is gyre_mackenzie02.  
 
 * ##[plot_arctic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_arctic.ipynb)  
     
