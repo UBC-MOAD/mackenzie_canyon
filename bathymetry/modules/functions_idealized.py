@@ -54,7 +54,7 @@ def Mackenzie_measurements(x_wall, y_wall):
     z_bottom = fluid_depth - fluid_depth
     z_paral = 825
     z_break = fluid_depth - 80.0
-    z_wall = fluid_depth - 40.0 
+    z_wall = fluid_depth - 0.0 #changed from 40 to 0 for open boundaries dec15 
     
     return x_wall, y_wall, w_break, w_mid, w_head, width_f,\
     cR, L, y_coast, y_head, y_break, y_paral, y_base,\
