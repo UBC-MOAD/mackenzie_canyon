@@ -8,51 +8,26 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##Author: Idalia Machuca, University of British Columbia
 
-* ##[extract_realistic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/extract_realistic.ipynb)  
-    
-    October: This notebook extracts the realistic bathymetry of the domain.  
 
 * ##[final_bathymetry.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/final_bathymetry.ipynb)  
     
+    November: The final notebook used to create a domain, create a coordinate grid, extract the realistic bathymetry, and create the corresponding idealized bathymetry.  
+
 * ##[gyre_runs.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_runs.ipynb)  
     
-    May: Part 1 - Notes and results of the original GYRE configuration **GYRE_Test**, second set of configurations **attempt1** where bathymetry and forcing are tested, third set of configurations **attempt2** where the forcing was changed, and the first Mackenzie Canyon run **gyre_mackenzie01**.  
-
-* ##[Mackenzie_grid_SEA.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/Mackenzie_grid_SEA.ipynb)  
-    
-* ##[refine_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/refine_mackenzie.ipynb)  
-    
-* ##[rough_bathy1.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/rough_bathy1.ipynb)  
-    
-    May: Attempt 1 - Previous idealized equations. For final bathymetry, refer to make_mackenzie.ipynb.  
-
-* ##[make_coordinates.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_coordinates.ipynb)  
-    
-    May: Details about the coordinates file used the NEMO.  
+    May: Part 1 - Notes and results of the original GYRE configuration GYRE_Test second set of configurations attempt1 where bathymetry and forcing are tested, third set of configurations attempt2 where the forcing was changed, and the first Mackenzie Canyon run gyre_mackenzie01.  
 
 * ##[gyre_runs_mackenzie01.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_runs_mackenzie01.ipynb)  
     
     October: Part 2 - This notebook is a continuation of gyre_runs.ipynb, with specific interest in Mackenzie Canyon runs. The configuration used to produce these results is gyre_mackenzie01.  
 
-* ##[rough_bathy2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/rough_bathy2.ipynb)  
-    
-    July: Attempt 2 - Original canyon tools. For final bathymetry, refer to make_mackenzie.ipynb.  
-
-* ##[room_of_requirement.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/room_of_requirement.ipynb)  
-    
-    Snippets.  
-
 * ##[gyre_runs_mackenzie02.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_runs_mackenzie02.ipynb)  
     
-    November: Part 3 - This notebook is a continuation of gyre_runs.ipynb and gyre_runs_mackenzie01. It uses the bathymetries and grid created in final_bathymetry.ipynb. The configuration used to produce these results is gyre_mackenzie02.  
+    November: Part 3 - This notebook is a continuation of gyre_runs.ipynb and gyre_runs_mackenzie01.ipynb. The configuration used to produce these results is gyre_mackenzie02.  
 
-* ##[plot_arctic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_arctic.ipynb)  
+* ##[make_coordinates_SEA.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_coordinates_SEA.ipynb)  
     
-    May: Bathymetry of the Arctic Ocean using IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR grids.  
-
-* ##[make_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_mackenzie.ipynb)  
-    
-    August: Various versions of Mackenzie Canyon bathymetry.  
+    October: Creates an orthogonal coordinate grid. This is the final method used.  
 
 * ##[plot_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_mackenzie.ipynb)  
     
