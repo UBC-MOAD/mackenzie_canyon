@@ -28,8 +28,8 @@ clear all; clc
 
 display('Compute_ScalingFactors.m is a revision of compute_grid_and_scaling_factors.m')
 
-fileout = ('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/initial_sets/coordinates/coords_01.nc');
-infile = ('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/initial_sets/grid/grid_01.nc')
+fileout = ('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/initial_sets/coordinates/coords_02.nc');
+infile = ('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/initial_sets/grid/grid_02.nc')
 
 % I added this transpose as a quick fix
 lon_T = transpose(ncread(infile, 'grid_lons'));
