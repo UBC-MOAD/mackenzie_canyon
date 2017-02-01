@@ -8,6 +8,15 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##Author: Idalia Machuca, University of British Columbia
 
+
+* ##[plot_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_mackenzie.ipynb)  
+    
+    May: Bathymetry of Mackenzie Canyon as depicted by the IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR.  
+
+* ##[make_coordinates_SEA.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_coordinates_SEA.ipynb)  
+    
+    October: Creates an orthogonal coordinate grid. This is the final method used.  
+
 * ##[final_bathymetry.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/final_bathymetry.ipynb)  
     
     November: The final notebook used to create a domain, create a coordinate grid, extract the realistic bathymetry, and create the corresponding idealized bathymetry.  
@@ -28,9 +37,9 @@ Descriptions under the links below are from the first cell of the notebooks
     
     January: Part 4 - This notebook is a continuation of gyre_runs_mackenzie02.ipynb. The configuration used to produce these results is still gyre_mackenzie02.  
 
-* ##[plot_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/plot_mackenzie.ipynb)  
+* ##[runs_mackenzie04.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/runs_mackenzie04.ipynb)  
     
-    May: Bathymetry of Mackenzie Canyon as depicted by the IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR.  
+    January: Part 5 - This notebook is a continuation of gyre_runs_mackenzie03.ipynb. The configuration used to produce these results is still gyre_mackenzie02.   
 
 
 ##License
