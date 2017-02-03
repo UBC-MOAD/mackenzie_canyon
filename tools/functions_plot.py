@@ -141,7 +141,8 @@ def plot_region(fig, ax, x_region, y_region, z_region):
 #--------------------------------------------------------------------------------------
 
 def mask_output(var):
-    var_m = np.ma.masked_values(var, 0.0000)
+    #var_m = np.ma.masked_values(var, 0.0)
+    var_m = np.ma.masked_values(var, np.isnan(var))
     return var_m
 
 #--------------------------------------------------------------------------------------
