@@ -163,13 +163,16 @@ def load_model_output(path, cfg):
 
     lon = gridT.variables['nav_lon']
     lat = gridT.variables['nav_lat']
-    tem = gridT.variables['votemper']
-    sal = gridT.variables['vosaline']
-    ssh = gridT.variables['sossheig']
-    U = gridU.variables['vozocrtx']
-    V = gridV.variables['vomecrty']
-    W = gridW.variables['vovecrtz']
-    tmask = 1 - mesh_mask['tmask'][:]
+    tem = gridT.variables['votemper'][:]
+    sal = gridT.variables['vosaline'][:]
+    ssh = gridT.variables['sossheig'][:]
+    U = gridU.variables['vozocrtx'][:]
+    V = gridV.variables['vomecrty'][:]
+    W = gridW.variables['vovecrtz'][:]
+    
+    tmask0 = 1 - mesh_mask['tmask'][:]
+    time_len = tem.shape[0]
+    tmask = np.tile(tmask0, (time_len, 1, 1, 1))
     
     tem_masked = np.ma.array(tem, mask=tmask)
     sal_masked = np.ma.array(sal, mask=tmask)
