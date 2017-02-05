@@ -140,10 +140,10 @@ def plot_region(fig, ax, x_region, y_region, z_region):
 
 #--------------------------------------------------------------------------------------
 
-def mask_output(var):
+#def mask_output(var):
     #var_m = np.ma.masked_values(var, 0.0)
-    var_m = np.ma.masked_values(var, np.isnan(var))
-    return var_m
+    #var_m = np.ma.masked_values(var, np.isnan(var))
+    #return var_m
 
 #--------------------------------------------------------------------------------------
 
@@ -159,13 +159,23 @@ def load_model_output(path, cfg):
     gridU = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_U.nc')[0])
     gridV = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_V.nc')[0])
     gridW = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_W.nc')[0])
+    mesh_mask = nc.Dataset(glob.glob(path + cfg + '/mesh_mask.nc')[0])
 
     lon = gridT.variables['nav_lon']
     lat = gridT.variables['nav_lat']
-    tem = mask_output(gridT.variables['votemper'])
-    sal = mask_output(gridT.variables['vosaline'])
-    ssh = mask_output(gridT.variables['sossheig'])
-    U = mask_output(gridU.variables['vozocrtx'])
-    V = mask_output(gridV.variables['vomecrty'])
-    W = mask_output(gridW.variables['vovecrtz'])
-    return gridT, lon, lat, tem, sal, ssh, U, V, W
+    tem = gridT.variables['votemper']
+    sal = gridT.variables['vosaline']
+    ssh = gridT.variables['sossheig']
+    U = gridU.variables['vozocrtx']
+    V = gridV.variables['vomecrty']
+    W = gridW.variables['vovecrtz']
+    tmask = 1 - mesh_mask['tmask'][:]
+    
+    tem_masked = np.ma.array(tem, mask=tmask)
+    sal_masked = np.ma.array(sal, mask=tmask)
+    ssh_masked = np.ma.array(ssh, mask=tmask)
+    U_masked = np.ma.array(U, mask=tmask)
+    V_masked = np.ma.array(V, mask=tmask)
+    W_masked = np.ma.array(W, mask=tmask)
+
+    return gridT, lon, lat, tem_masked, sal_masked, ssh_masked, U_masked, V_masked, W_masked
