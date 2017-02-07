@@ -155,6 +155,7 @@ def load_model_output(path, cfg):
     configuration directory and ends in the final directory
     without a slash.
     '''
+
     gridT = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_T.nc')[0])
     gridU = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_U.nc')[0])
     gridV = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_V.nc')[0])
@@ -169,16 +170,18 @@ def load_model_output(path, cfg):
     U = gridU.variables['vozocrtx'][:]
     V = gridV.variables['vomecrty'][:]
     W = gridW.variables['vovecrtz'][:]
-    
-    tmask0 = 1 - mesh_mask['tmask'][:]
-    time_len = tem.shape[0]
-    tmask = np.tile(tmask0, (time_len, 1, 1, 1))
-    
-    tem_masked = np.ma.array(tem, mask=tmask)
-    sal_masked = np.ma.array(sal, mask=tmask)
-    ssh_masked = np.ma.array(ssh, mask=tmask)
-    U_masked = np.ma.array(U, mask=tmask)
-    V_masked = np.ma.array(V, mask=tmask)
-    W_masked = np.ma.array(W, mask=tmask)
 
-    return gridT, lon, lat, tem_masked, sal_masked, ssh_masked, U_masked, V_masked, W_masked
+    tmask0_rest = 1 - mesh_mask['tmask'][:]
+    tmask0_ssh = tmask0_rest[:,0,:,:]
+    time_len = tem.shape[0]
+    tmask_rest = np.tile(tmask0_rest, (time_len, 1, 1, 1))
+    tmask_ssh = np.tile(tmask0_ssh, (time_len, 1, 1))
+
+    tem_masked = np.ma.array(tem, mask=tmask_rest)
+    sal_masked = np.ma.array(sal, mask=tmask_rest)
+    ssh_masked = np.ma.array(ssh, mask=tmask_ssh)
+    U_masked = np.ma.array(U, mask=tmask_rest)
+    V_masked = np.ma.array(V, mask=tmask_rest)
+    W_masked = np.ma.array(W, mask=tmask_rest)
+
+    return gridT, lon, lat, tem_masked, sal_masked, ssh_masked, U_masked, V_masked, W_masked, tmask_rest
