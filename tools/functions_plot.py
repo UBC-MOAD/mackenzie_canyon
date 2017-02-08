@@ -25,7 +25,7 @@ def get_variables(projection):
         ibcao_grid_name = 'IBCAO_V3_500m_RR.grd'
     elif projection == 'G':
         ibcao_grid_name = 'IBCAO_V3_30arcsec_RR.grd'
-    ibcao_grid_dir = '/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid'
+    ibcao_grid_dir = '/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/data'
     ibcao_grid = os.path.join(ibcao_grid_dir, ibcao_grid_name)
     ibcao_nc = scipy.io.netcdf_file (ibcao_grid)
 
@@ -42,7 +42,7 @@ def def_regionG(xl=-145, xr=-133, yb=68.6, yt=72.5):
     right, bottom, and top boundaries when plotted.
     '''
 
-    ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/IBCAO_V3_30arcsec_RR.grd')
+    ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/data/IBCAO_V3_30arcsec_RR.grd')
     x = ibcao_file.variables['x'][:]
     y = ibcao_file.variables['y'][:]
     z = ibcao_file.variables['z'][:]
@@ -63,7 +63,7 @@ def def_regionS(xl=-1750e3, xr=-1000e3, yb=1300e3, yt=2050e3):
     right, bottom, and top boundaries when plotted.
     '''
 
-    ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid/IBCAO_V3_500m_RR.grd')
+    ibcao_file = scipy.io.netcdf_file('/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/data/IBCAO_V3_500m_RR.grd')
     x = ibcao_file.variables['x'][:]
     y = ibcao_file.variables['y'][:]
     z = ibcao_file.variables['z'][:]
