@@ -30,14 +30,16 @@ def Mackenzie_measurements(x_wall, y_wall):
     # Distances
     wall_coast = 26627.0539114
     wall_head = 48259.7140481
-    wall_paral = 167520.894219
+    wall_pointA = 133268.525917 #new
+    wall_pointB = 111635.567809 #new
+    wall_paral = 167520.894219 
     wall_base = 174731.93755
-    L = 93744.3331621
+    L = 98000 #original: 93744.3331621
     
     # Alongshore
     w_break = 62681.735776859277  
     w_mid = 46456.969337226466  
-    w_head = 14142.13562373095 
+    w_head = 36000 # original: 14142.13562373095 
     width_f = 62681.735776859277
 
     # Cross-shore
@@ -45,6 +47,8 @@ def Mackenzie_measurements(x_wall, y_wall):
     y_coast = y_wall - wall_coast
     y_head = y_wall - wall_head
     y_break = (y_wall - wall_head) - L
+    y_pointA = (y_wall - wall_pointA) #new
+    y_pointB = (y_wall - wall_pointB) #new
     y_paral = y_wall - wall_paral
     y_base = y_wall - wall_base
     
@@ -53,12 +57,14 @@ def Mackenzie_measurements(x_wall, y_wall):
     fluid_depth = 1300.0
     z_bottom = fluid_depth - fluid_depth
     z_paral = fluid_depth - 825.0
+    z_pointA = fluid_depth - 379 #new
+    z_pointB = fluid_depth - 258 #new
     z_break = fluid_depth - 80.0
-    z_coast = fluid_depth - 40.0 #changed from 40 to 0 for open boundaries dec15
+    z_coast = fluid_depth - 40.0 
     
-    return x_wall, y_wall, w_break, w_mid, w_head, width_f,\
-    cR, L, y_coast, y_head, y_break, y_paral, y_base,\
-    fluid_depth, z_bottom, z_paral, z_break, z_coast, p
+    return x_wall, y_wall, w_break, w_mid, w_head, cR, L, p,\
+    y_coast, y_head, y_break, y_pointA, y_pointB, y_paral, y_base,\
+    fluid_depth, z_bottom, z_paral, z_pointA, z_pointB, z_break, z_coast
 
 # ------------------------------------------------------------------------------------
 
@@ -93,8 +99,8 @@ def set_domain_grid(xsize, ysize, x_wall, y_wall):
 
 # ------------------------------------------------------------------------------------
 
-def tanktopo(y, y_base, y_break, y_coast,
-             fluid_depth, z_bottom, z_break, z_coast):
+def tanktopo(y, y_base, y_break, y_coast, fluid_depth, 
+             z_bottom, z_break, z_coast):
     
     ''' This function generates the topographical profile of the continental
     slope and shelf without the canyon. The profile is created in parts using
@@ -128,8 +134,8 @@ def tanktopo(y, y_base, y_break, y_coast,
 
 # ------------------------------------------------------------------------------------
 
-def canyontopo(y, y_base, y_paral, y_break, y_head, y_coast,
-               fluid_depth, z_bottom, z_paral, z_break, z_coast):
+def canyontopo(y, y_base, y_paral, y_pointA, y_pointB, y_head, y_coast,
+               fluid_depth, z_bottom, z_paral, z_pointA, z_pointB, z_break, z_coast):
     
     ''' This function generates the topographical profile for the canyon along
     its axis (cross-shore direction). Similar to tanktopo, the profile is
@@ -137,7 +143,9 @@ def canyontopo(y, y_base, y_paral, y_break, y_head, y_coast,
     '''
     
     n_coast_break = (z_coast - z_break) / (y_coast - y_head)
-    n_break_paral = (z_break - z_paral) / (y_head - y_paral)
+    n_head_pointB = (z_break - z_pointB) / (y_head - y_pointB)
+    n_pointB_pointA = (z_pointB - z_pointA) / (y_pointB - y_pointA)
+    n_pointA_paral = (z_pointA - z_paral) / (y_pointA - y_paral)
     n_paral_bottom = (z_paral - z_bottom) / (y_paral - y_base)
 
     topo_cp = np.zeros(len(y))
@@ -151,8 +159,14 @@ def canyontopo(y, y_base, y_paral, y_break, y_head, y_coast,
         elif y[ii] > y_base and y[ii] <= y_paral:
             topo_cp[ii] = (n_paral_bottom * y[ii]) - (n_paral_bottom * y_base) + z_bottom
         
-        elif y[ii] > y_paral and y[ii] <= y_head:
-            topo_cp[ii] = (n_break_paral * y[ii]) - (n_break_paral * y_paral) + z_paral
+        elif y[ii] > y_paral and y[ii] <= y_pointA:
+            topo_cp[ii] = (n_pointA_paral * y[ii]) - (n_pointA_paral * y_paral) + z_paral
+            
+        elif y[ii] > y_pointA and y[ii] <= y_pointB:
+            topo_cp[ii] = (n_pointB_pointA * y[ii]) - (n_pointB_pointA * y_pointA) + z_pointA
+        
+        elif y[ii] > y_pointB and y[ii] <= y_head:
+            topo_cp[ii] = (n_head_pointB * y[ii]) - (n_head_pointB * y_pointB) + z_pointB
                     
         elif y[ii] > y_head and y[ii] <= y_coast :      
             topo_cp[ii] = (n_coast_break * y[ii]) - (n_coast_break * y_head) + z_break
@@ -166,8 +180,7 @@ def canyontopo(y, y_base, y_paral, y_break, y_head, y_coast,
 
 # ------------------------------------------------------------------------------------
    
-def widthprofile(y, y_base, y_break, y_head, y_coast, cR, L,
-                 w_break, w_mid, w_head, p):
+def widthprofile(y, y_base, y_head, y_coast, cR, L, p, w_break, w_mid, w_head):
     
     ''' This function defines the width profile of the canyon (top-down view).
     The width of the canyon is defined for all distances in the cross-shore
@@ -188,8 +201,9 @@ def widthprofile(y, y_base, y_break, y_head, y_coast, cR, L,
             if y[l] <= y_base:
                 wp[l] = w_break
 
-            elif y[l] > y_base and y[l] <= y_head:   
+            elif y[l] > y_base and y[l] <= y_head:
                 wp[l] = Ah * (y[l] - y_head)**2 + dh * (y[l] - y_head) + w_head
+                #wp[l] = Ah * (y[l] - y_head)**1 + dh * (y[l] - y_head) + w_head
 
             elif y[l] > y_head and y[l] <= y_coast:
                 wp[l] = wp[l-1]
@@ -203,9 +217,9 @@ def widthprofile(y, y_base, y_break, y_head, y_coast, cR, L,
 
 # ------------------------------------------------------------------------------------
 
-def make_topo_smooth(y, y_base, y_paral, y_break, y_head, y_coast, cR, L,
-                     x, x_wall, w_break, w_mid, w_head, p,
-                     fluid_depth, z_bottom, z_paral, z_break, z_coast):
+def make_topo_smooth(y, y_base, y_paral, y_pointA, y_pointB, y_break, y_head, y_coast,
+                     cR, L, p, x, x_wall, w_break, w_mid, w_head,
+                     fluid_depth, z_bottom, z_paral, z_pointA, z_pointB, z_break, z_coast):
     
     ''' This function returns the depth field of the continental slope and
     shelf with a sech-shaped canyon. It uses the functions tanktopo,
@@ -232,15 +246,14 @@ def make_topo_smooth(y, y_base, y_paral, y_break, y_head, y_coast, cR, L,
     '''
     
     # Topography without the canyon
-    slope_profile = tanktopo(y, y_base, y_break, y_coast,
-                             fluid_depth, z_bottom, z_break, z_coast)
+    slope_profile = tanktopo(y, y_base, y_break, y_coast, fluid_depth, 
+                             z_bottom, z_break, z_coast)
     
-    canyon_profile = canyontopo(y, y_base, y_paral, y_break, y_head, y_coast,
-               fluid_depth, z_bottom, z_paral, z_break, z_coast)
+    canyon_profile = canyontopo(y, y_base, y_paral, y_pointA, y_pointB, y_head, y_coast,
+                                fluid_depth, z_bottom, z_paral, z_pointA, z_pointB, z_break, z_coast)
   
     # Slope of the canyon as well as the shape
-    width_profile = widthprofile(y, y_base, y_break, y_head, y_coast, cR, L,
-                                 w_break, w_mid, w_head, p)
+    width_profile = widthprofile(y, y_base, y_head, y_coast, cR, L, p, w_break, w_mid, w_head)
   
     # Depth of the canyon (negative values set to zero)
     canyondepth = slope_profile - canyon_profile
