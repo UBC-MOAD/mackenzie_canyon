@@ -13,6 +13,10 @@ Descriptions under the links below are from the first cell of the notebooks
     
     May: Bathymetry of Mackenzie Canyon as depicted by the IBCAO_V3_500m_RR and IBCAO_V3_30arcsec_RR.  
 
+* ##[refine_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/refine_mackenzie.ipynb)  
+    
+    November: Implements improvements to the basic bathymetry originally developed in make_mackenzie.ipynb.  
+
 * ##[make_coordinates_SEA.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_coordinates_SEA.ipynb)  
     
     October: Creates an orthogonal coordinate grid. This is the final method used.  
