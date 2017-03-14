@@ -185,3 +185,17 @@ def load_model_output(path, cfg):
     W_masked = np.ma.array(W, mask=tmask_rest)
 
     return gridT, lon, lat, tem_masked, sal_masked, ssh_masked, U_masked, V_masked, W_masked, tmask_rest
+
+#--------------------------------------------------------------------------------------
+
+def load_model_other(path, cfg):
+    '''This function is similar to the previous one in that it returns
+    other details in the model output, such as the components of wind stress.
+    '''
+
+    gridU = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_U.nc')[0])
+    gridV = nc.Dataset(glob.glob(path + cfg + '/GYRE_*_grid_V.nc')[0])
+    utau = gridU['sozotaux']
+    vtau = gridV['sometauy']
+
+    return utau, vtau
