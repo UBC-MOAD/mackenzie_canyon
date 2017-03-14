@@ -8,13 +8,13 @@ Descriptions under the links below are from the first cell of the notebooks
 ##Author: Idalia Machuca, University of British Columbia
 
     
-* ##[runs_mackenzie05.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/runs_mackenzie05.ipynb)  
+* ##[runs_mackenzie05.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/runs_mackenzie05.ipynb)  
     
-* ##[winds_analytical_formula.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/winds_analytical_formula.ipynb)  
+* ##[winds_analytical_formula.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/winds_analytical_formula.ipynb)  
     
     This notebook takes a closer look at the analytical wind forcing described in sbcana.F90.  
 
-* ##[winds_historical_records.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/winds_historical_records.ipynb)  
+* ##[winds_historical_records.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/winds_historical_records.ipynb)  
     
     Loading historical data for Tuk Station using pandas.  
 
