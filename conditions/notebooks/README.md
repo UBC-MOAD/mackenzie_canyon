@@ -7,15 +7,16 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##Author: Idalia Machuca, University of British Columbia
 
-* ##[prepare_stratification.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/prepare_stratification.ipynb)  
     
-* ##[PlotANHA.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/PlotANHA.ipynb)  
+* ##[runs_mackenzie05.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/runs_mackenzie05.ipynb)  
     
-    January, 2016: Getting familiarized with ANHA model output.  
+* ##[winds_analytical_formula.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/winds_analytical_formula.ipynb)  
+    
+    This notebook takes a closer look at the analytical wind forcing described in sbcana.F90.  
 
-* ##[NEMOgcm_DataStructure.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/NEMOgcm_DataStructure.ipynb)  
+* ##[winds_historical_records.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/winds_historical_records.ipynb)  
     
-    January, 2016: Getting familiarized with ANHA model output.  
+    Loading historical data for Tuk Station using pandas.  
 
 
 ##License
