@@ -23,10 +23,10 @@ paths:
   XIOS: $HOME/XIOS/
 
   # At present: Directory with grid subdirectory containing coordinates and bathymetry
-  forcing: $HOME/mackenzie_canyon/
+  forcing: /home/imachuca/Canyons/mackenzie_canyon/
 
   # Absolute or relative path to directory where the temporary run folder is created
-  runs directory: $HOME/results_mackenzie/idealized/
+  runs directory: /home/imachuca/Canyons/results_mackenzie/idealized/
 
 grid:
   # Names of files in the grid subdirectory of the forcing path
@@ -38,7 +38,7 @@ forcing:
   # Absolute or relative paths of targets of the symlinks created in the run directory
   # Other sub-section keys have been removed for now
   NEMO_files:
-    link to: /home/imachuca/mackenzie_canyon/conditions/NEMO_files/
+    link to: /home/imachuca/Canyons/mackenzie_canyon/conditions/NEMO_files/
 
 namelists:
   # If relative, it is appended to the directory containing the run description file
@@ -48,8 +48,8 @@ namelists:
 output:
   # Relative path for run-specific output file or absolute path with configuration elements
   files: iodef.xml
-  domain: /ocean/imachuca/Canyons/mackenzie_canyon/output/domain_def.xml
-  fields: /ocean/imachuca/Canyons/mackenzie_canyon/output/field_def.xml
+  domain: ../../../../output/domain_def.xml
+  fields: ../../../../output/field_def.xml
   # Whether the XIOS server should be run on separate processors
   separate XIOS server: True
   # Number of XIOS servers if True
@@ -58,9 +58,17 @@ output:
 PBS resources:
   - partition=QDR
 
-module load python
-module load intel/14.0.2
-module load intel/14.0/netcdf-4.3.3.1_mpi
-module load intel/14.0/netcdf-fortran-4.4.0_mpi
-module load intel/14.0/hdf5-1.8.15p1_mpi
-module load intel/14.0/nco-4.5.2
+modules to load:
+  - intel
+  - intel/14.0/netcdf-4.3.3.1_mpi
+  - intel/14.0/netcdf-fortran-4.4.0_mpi
+  - intel/14.0/hdf5-1.8.15p1_mpi
+  - intel/14.0/nco-4.5.2
+  - python
+
+#module load python
+#module load intel/14.0.2
+#module load intel/14.0/netcdf-4.3.3.1_mpi
+#module load intel/14.0/netcdf-fortran-4.4.0_mpi
+#module load intel/14.0/hdf5-1.8.15p1_mpi
+#module load intel/14.0/nco-4.5.2
