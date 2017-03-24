@@ -1,7 +1,7 @@
 # nemo command processor run description for Mackenzie Canyon in NEMO-3.6
 
 # The name of the NEMO configuration found in the directory CONFIG in NEMOGCM
-config name: gyre_mackenzie02
+config name: mackenzie03
 
 # Specifies how the domain is distributed over the processors in the i and j directions
 MPI decomposition: 3x3
