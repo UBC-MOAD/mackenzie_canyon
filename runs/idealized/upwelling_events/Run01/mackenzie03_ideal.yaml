@@ -1,0 +1,67 @@
+# nemo command processor run description for Mackenzie Canyon in NEMO-3.6
+
+# The name of the NEMO configuration found in the directory CONFIG in NEMOGCM
+config name: mackenzie03
+
+# Specifies how the domain is distributed over the processors in the i and j directions
+MPI decomposition: 4x4
+
+# Job identifier that appears in qstat listing
+run_id: mcknz
+
+# Wall-clock time requested for the run
+walltime: 00:30:00
+
+# Notification email address
+email: imachuca@eos.ubc.ca
+
+paths:
+  # Absolute path of the CONFIG directory in the NEMO-3.6-code code tree
+  NEMO code config: $HOME/NEMO-3.6-code/NEMOGCM/CONFIG/
+  
+  # Absolute or relative path to XIOS code tree
+  XIOS: $HOME/XIOS/
+
+  # At present: Directory with grid subdirectory containing coordinates and bathymetry
+  forcing: /home/imachuca/Canyons/mackenzie_canyon/
+
+  # Absolute or relative path to directory where the temporary run folder is created
+  runs directory: /home/imachuca/Canyons/results_mackenzie/idealized/
+
+grid:
+  # Names of files in the grid subdirectory of the forcing path
+  # Names coordinates.nc and bathy_meter.nc are not necessary
+  coordinates: coords_02.nc
+  bathymetry: ideal_bathy_05.nc
+  
+forcing:
+  # Absolute or relative paths of targets of the symlinks created in the run directory
+  # Other sub-section keys have been removed for now
+  NEMO_files:
+    link to: /home/imachuca/Canyons/mackenzie_canyon/conditions/NEMO_files/
+
+namelists:
+  # If relative, it is appended to the directory containing the run description file
+  namelist_cfg:
+    - namelist_cfg
+
+output:
+  # Relative path for run-specific output file or absolute path with configuration elements
+  files: iodef.xml
+  domain: ../../../../output/domain_def.xml
+  fields: ../../../../output/field_def.xml
+  # Whether the XIOS server should be run on separate processors
+  separate XIOS server: True
+  # Number of XIOS servers if True
+  XIOS servers: 1
+
+PBS resources:
+  - partition=QDR
+
+modules to load:
+  - intel
+  - intel/14.0/netcdf-4.3.3.1_mpi
+  - intel/14.0/netcdf-fortran-4.4.0_mpi
+  - intel/14.0/hdf5-1.8.15p1_mpi
+  - intel/14.0/nco-4.5.2
+  - python
