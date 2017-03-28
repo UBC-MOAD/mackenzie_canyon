@@ -7,10 +7,6 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##Author: Idalia Machuca, University of British Columbia
 
-* ##[NEMOgcm_DataStructure.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/NEMOgcm_DataStructure.ipynb)  
-    
-    January, 2016: Getting familiarized with ANHA model output.  
-
 * ##[prepare_stratification.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/prepare_stratification.ipynb)  
     
 * ##[runs_mackenzie05.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/runs_mackenzie05.ipynb)  
@@ -19,17 +15,14 @@ Descriptions under the links below are from the first cell of the notebooks
     
     This notebook takes a closer look at the analytical wind forcing described in sbcana.F90.  
 
-* ##[PlotANHA.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/PlotANHA.ipynb)  
-    
-    January, 2016: Getting familiarized with ANHA model output.  
-
 * ##[winds_upwelling_events.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/winds_upwelling_events.ipynb)  
     
     March: Replicating wind-driven upwelling events.  
 
 * ##[winds_historical_records.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/winds_historical_records.ipynb)  
     
-    Loading historical data for Tuk Station 
+    Loading historical data for Tuk Station using pandas.  
+
 
 
 ##License
