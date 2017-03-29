@@ -7,22 +7,21 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##Author: Idalia Machuca, University of British Columbia
 
-* ##[prepare_stratification.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/prepare_stratification.ipynb)  
+* ##[figures_upwelling_events.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/figures_upwelling_events.ipynb)  
     
-* ##[runs_mackenzie05.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/runs_mackenzie05.ipynb)  
-    
+    This notebook shows the development of functions used to visualize the circulation during upwelling events.  
+
 * ##[winds_analytical_formula.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/winds_analytical_formula.ipynb)  
     
-    This notebook takes a closer look at the analytical wind forcing described in sbcana.F90.  
+    This notebook is used to create and test new wind forcing patterns in sbcana.F90.  
 
 * ##[winds_upwelling_events.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/winds_upwelling_events.ipynb)  
     
-    March: Replicating wind-driven upwelling events.  
+    This notebooks looks at the real and modelled wind stress forcing for specific upwelling events.  
 
 * ##[winds_historical_records.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/winds_historical_records.ipynb)  
     
-    Loading historical data for Tuk Station using pandas.  
-
+    This notebooks takes a closer look at the wind data that corresponds to available data and publications.  
 
 
 ##License
