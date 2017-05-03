@@ -7,6 +7,8 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##Author: Idalia Machuca, University of British Columbia
 
+* ##[ekman_velocities_boundary.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/ekman_velocities_boundary.ipynb)  
+
 * ##[figures_upwelling_events.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/figures_upwelling_events.ipynb)  
     
     This notebook shows the development of functions used to visualize the circulation during upwelling events.  
