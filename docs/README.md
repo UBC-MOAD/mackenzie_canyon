@@ -9,6 +9,8 @@ Descriptions under the links below are from the first cell of the notebooks
 
 * ##[Poster_INCISE16.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/docs/Poster_INCISE16.ipynb)  
     
+* ##[CommitteeMeeting_May2017.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/docs/CommitteeMeeting_May2017.ipynb)  
+    
 
 ##License
 
