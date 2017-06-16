@@ -11,6 +11,18 @@ Descriptions under the links below are from the first cell of the notebooks
 * ##[gyre_runs_mackenzie02.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_runs_mackenzie02.ipynb)  
     
     November: Part 3 - This notebook is a continuation of gyre_runs.ipynb and gyre_runs_mackenzie01.ipynb. The configuration used to produce these results is gyre_mackenzie02.  
+
+* ##[Untitled.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/Untitled.ipynb)  
+    
+* ##[room_of_requirement.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/room_of_requirement.ipynb)  
+    
+    Snippets.  
+
+* ##[extract_realistic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/extract_realistic.ipynb)  
+    
+    October: This notebook extracts the realistic bathymetry of the domain. Refer to final_bathymetry.ipynb for the official compilation.  
+
+* ##[Untitled1.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/Untitled1.ipynb)  
     
 * ##[make_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_mackenzie.ipynb)  
     
@@ -24,13 +36,25 @@ Descriptions under the links below are from the first cell of the notebooks
     
     May: Part 1 - Notes and results of the original GYRE configuration GYRE_Test second set of configurations attempt1 where bathymetry and forcing are tested, third set of configurations attempt2 where the forcing was changed, and the first Mackenzie Canyon run gyre_mackenzie01.  
 
+* ##[depth_levels.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/depth_levels.ipynb)  
+    
+    June: Experimenting with the parameters for the calculations for depth levels (gdept_1d).  
+
 * ##[make_coordinates.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_coordinates.ipynb)  
     
     May: Details about the coordinates file used the NEMO. This method was replaced by that in make_coordinates_SEA.ipynb  
 
+* ##[ideal_canyon_different_dimensions.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/ideal_canyon_different_dimensions.ipynb)  
+    
+    Changing the length and width of the ideal canyon for cmos scaling runs.  
+
 * ##[make_coordinates_SEA.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_coordinates_SEA.ipynb)  
     
     October: Creates an orthogonal coordinate grid. This is the final method used.  
+
+* ##[rough_bathy2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/rough_bathy2.ipynb)  
+    
+    July: Attempt 2 - Original canyon tools. For final bathymetry, refer to make_mackenzie.ipynb.  
 
 * ##[radius_of_curvature.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/radius_of_curvature.ipynb)  
     
@@ -47,6 +71,10 @@ Descriptions under the links below are from the first cell of the notebooks
 * ##[runs_mackenzie04.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/runs_mackenzie04.ipynb)  
     
     January: Part 5 - This notebook is a continuation of gyre_runs_mackenzie03.ipynb. The configuration used to produce these results is still gyre_mackenzie02.   
+
+* ##[rough_bathy1.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/rough_bathy1.ipynb)  
+    
+    May: Attempt 1 - Previous idealized equations. For final bathymetry, refer to make_mackenzie.ipynb.  
 
 * ##[final_bathymetry.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/final_bathymetry.ipynb)  
     
