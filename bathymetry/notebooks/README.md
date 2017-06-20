@@ -72,6 +72,10 @@ Descriptions under the links below are from the first cell of the notebooks
     
     January: Part 5 - This notebook is a continuation of gyre_runs_mackenzie03.ipynb. The configuration used to produce these results is still gyre_mackenzie02.   
 
+* ##[canyon_axis.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/canyon_axis.ipynb)  
+    
+    June: Checking the profile along the canyon axis.  
+
 * ##[rough_bathy1.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/rough_bathy1.ipynb)  
     
     May: Attempt 1 - Previous idealized equations. For final bathymetry, refer to make_mackenzie.ipynb.  
