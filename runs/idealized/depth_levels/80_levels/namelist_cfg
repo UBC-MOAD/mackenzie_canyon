@@ -62,11 +62,11 @@
    ppsur       =  999999.0               !  ORCA r4, r2 and r05 coefficients
    ppa0        =  999999.0               ! (default coefficients)
    ppa1        =  999999.0               ! (default coefficients)
-   ppkth       =  52.0                   ! (non dimensional) IAM The first depth interval
+   ppkth       =  62.0                   ! (non dimensional) IAM The first depth interval
                                          ! where the profile stretches to reach pphmax
    ppacr       =  1.0                    ! (non dimensional) IAM The higher the ppacr,
                                          ! the deeper the ppkth (more spaced out above ppkth)
-   ppdzmin     =  8.0                   ! (meters): depth of the top (first) model layer depth of second "w" level
+   ppdzmin     =  8.75                   ! (meters): depth of the top (first) model layer depth of second "w" level
    pphmax      =  1300.0                 ! (meters): maximum depth of the ocean depth of the last "w" level
    ldbletanh   =  .FALSE.                ! Use/do not use double tanf function for vertical coordinates
    ppa2        =  999999.0               ! Double tanh function parameters
