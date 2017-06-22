@@ -25,6 +25,17 @@ Descriptions under the links below are from the first cell of the notebooks
     
     This notebooks takes a closer look at the wind data that corresponds to available data and publications.  
 
+* ##[vertical_eddy_viscosity.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/vertical_eddy_viscosity.ipynb)  
+    
+
+* ##[prepare_stratification.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/prepare_stratification.ipynb)  
+    
+    This notebook creates the temperature and salinity stratification files for a domain.
+
+* ##[make_stratification.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/conditions/notebooks/make_stratification.ipynb)  
+    
+    Simplified version of prepare_stratification.ipynb. Currently, only uses one T &S profile (#21).
+
 
 ##License
 
