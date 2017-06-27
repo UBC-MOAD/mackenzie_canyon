@@ -299,7 +299,7 @@ def create_grid(nx, ny, lonW, latW, lonE, latE):
     thelons[:,0] = lon2
     
     dx = geo_tools.haversine(thelons[-1,0], thelats[-1,0], thelons[-2,0], thelats[-2,0])
-    print(dx)
+    print('dx (distance between the corner southern point and its neighbour) [km]:', dx)
 
     angle = 0
     for j in range(1, ny):
@@ -313,8 +313,8 @@ def create_grid(nx, ny, lonW, latW, lonE, latE):
         angle = 2*angle - prevangle
         thelats[i, j], thelons[i, j] = step_forward(thelats[i, j-1], thelons[i, j-1], dx, angle)
     
-    dx2 = geo_tools.haversine(thelons[-1,1], thelats[-1,1], thelons[-2,1], thelats[-2,1])
-    print(dx2)
+    dx2 = geo_tools.haversine(thelons[-1,-1], thelats[-1,-1], thelons[-2,-1], thelats[-2,-1])
+    print('dx2 (distance between the corner northern point and its neighbour) [km]:', dx2)
 
     return thelons, thelats
    
