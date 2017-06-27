@@ -204,7 +204,7 @@ def create_bathy_file(bathymetry, filename, title, description, ipynbname):
     :arg ipynbname: Name of source ipython notebook
     '''
     
-    directory = '/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/initial_sets/realistic/'
+    directory = '/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/NEMO_files/realistic/'
     dataset = Dataset(directory + filename, 'w')
     file_x = dataset.createDimension('x', bathymetry.shape[1])
     file_y = dataset.createDimension('y', bathymetry.shape[0])
