@@ -375,7 +375,7 @@ def create_grid_file(nx, ny, thelons, thelats, filename, title, description, ipy
     :arg filename: Directory and name of netCDF4 file
     '''
     
-    directory = '/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/initial_sets/grid/'
+    directory = '/ocean/imachuca/Canyons/mackenzie_canyon/coordinates/raw_coordinates'
     dataset = Dataset(directory + filename, 'w')
     x = dataset.createDimension('x', nx)
     y = dataset.createDimension('y', ny)
