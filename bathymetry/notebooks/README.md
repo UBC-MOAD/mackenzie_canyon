@@ -8,12 +8,14 @@ Descriptions under the links below are from the first cell of the notebooks
 
 ##Author: Idalia Machuca, University of British Columbia
 
+* ##[coordinates_from_grid_corrected.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/coordinates_from_grid_corrected.ipynb)  
+    
+    June: Using Michael's modules to calculate the coordinates and scaling factors from the raw grid.  
+
 * ##[gyre_runs_mackenzie02.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/gyre_runs_mackenzie02.ipynb)  
     
     November: Part 3 - This notebook is a continuation of gyre_runs.ipynb and gyre_runs_mackenzie01.ipynb. The configuration used to produce these results is gyre_mackenzie02.  
 
-* ##[Untitled.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/Untitled.ipynb)  
-    
 * ##[room_of_requirement.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/room_of_requirement.ipynb)  
     
     Snippets.  
@@ -22,8 +24,6 @@ Descriptions under the links below are from the first cell of the notebooks
     
     October: This notebook extracts the realistic bathymetry of the domain. Refer to final_bathymetry.ipynb for the official compilation.  
 
-* ##[Untitled1.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/Untitled1.ipynb)  
-    
 * ##[make_mackenzie.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_mackenzie.ipynb)  
     
     August: Various versions of Mackenzie Canyon bathymetry.  
