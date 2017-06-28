@@ -175,9 +175,9 @@ def canyon_for_model(fluid_depth, index, lon_s_grid, lat_s_grid, x_region, y_reg
     
 # -----------------------------------------------------------------------------------------
 
-def smooth_canyon(max_norm_depth_diff, smooth_factor, fluid_depth, index, lon_s_grid, lat_s_grid, x_region, y_region, z_region):
+def smooth_canyon(max_norm_depth_diff, smooth_factor, z_positive):
     
-    z_positive = canyon_for_model(fluid_depth, index, lon_s_grid, lat_s_grid, x_region, y_region, z_region)
+    #z_positive = canyon_for_model(fluid_depth, index, lon_s_grid, lat_s_grid, x_region, y_region, z_region)
     
     z_to_smooth = np.array(z_positive, copy=True)
     z_masked0 = np.ma.array(z_to_smooth)
