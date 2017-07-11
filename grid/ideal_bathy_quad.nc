@@ -1,0 +1,1 @@
+../bathymetry/NEMO_files/idealized/ideal_bathy_quad.nc
