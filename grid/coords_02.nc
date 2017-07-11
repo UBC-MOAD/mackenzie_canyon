@@ -1,0 +1,1 @@
+../coordinates/NEMO_files/coords_02.nc
