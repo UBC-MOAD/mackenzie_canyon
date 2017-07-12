@@ -16,10 +16,6 @@ Descriptions under the links below are from the first cell of the notebooks
     
     November: Part 3 - This notebook is a continuation of gyre_runs.ipynb and gyre_runs_mackenzie01.ipynb. The configuration used to produce these results is gyre_mackenzie02.  
 
-* ##[room_of_requirement.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/room_of_requirement.ipynb)  
-    
-    Snippets.  
-
 * ##[extract_realistic.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/extract_realistic.ipynb)  
     
     October: This notebook extracts the realistic bathymetry of the domain. Refer to final_bathymetry.ipynb for the official compilation.  
@@ -44,17 +40,9 @@ Descriptions under the links below are from the first cell of the notebooks
     
     May: Details about the coordinates file used the NEMO. This method was replaced by that in make_coordinates_SEA.ipynb  
 
-* ##[ideal_canyon_different_dimensions.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/ideal_canyon_different_dimensions.ipynb)  
-    
-    Changing the length and width of the ideal canyon for cmos scaling runs.  
-
 * ##[make_coordinates_SEA.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/make_coordinates_SEA.ipynb)  
     
     October: Creates an orthogonal coordinate grid. This is the final method used.  
-
-* ##[rough_bathy2.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/rough_bathy2.ipynb)  
-    
-    July: Attempt 2 - Original canyon tools. For final bathymetry, refer to make_mackenzie.ipynb.  
 
 * ##[radius_of_curvature.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/radius_of_curvature.ipynb)  
     
@@ -75,10 +63,6 @@ Descriptions under the links below are from the first cell of the notebooks
 * ##[canyon_axis.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/canyon_axis.ipynb)  
     
     June: Checking the profile along the canyon axis.  
-
-* ##[rough_bathy1.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/rough_bathy1.ipynb)  
-    
-    May: Attempt 1 - Previous idealized equations. For final bathymetry, refer to make_mackenzie.ipynb.  
 
 * ##[final_bathymetry.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/final_bathymetry.ipynb)  
     
