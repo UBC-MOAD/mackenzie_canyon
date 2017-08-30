@@ -64,6 +64,10 @@ Descriptions under the links below are from the first cell of the notebooks
     
     June: Checking the profile along the canyon axis.  
 
+* ##[no_canyon.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/no_canyon.ipynb)  
+    
+    August: Bathymetry for shelf and slope without canyon. Function moved to tools and implemented in final_bathymetry.  
+
 * ##[final_bathymetry.ipynb](http://nbviewer.jupyter.org/urls/bitbucket.org/CanyonsUBC/mackenzie_canyon/raw/tip/bathymetry/notebooks/final_bathymetry.ipynb)  
     
     November: The final notebook used to create a domain, create a coordinate grid, extract the realistic bathymetry, and create the corresponding idealized bathymetry.  
