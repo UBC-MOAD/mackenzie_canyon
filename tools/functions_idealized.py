@@ -272,6 +272,36 @@ def make_topo_smooth(y, y_base, y_paral, y_pointA, y_pointB, y_break, y_head, y_
 
 # ------------------------------------------------------------------------------------
 
+def make_no_canyon(y, y_base, y_break, y_coast, x, x_wall, fluid_depth, z_bottom, z_break, z_coast):
+    
+    ''' Modified from make_topo_smooth.
+    
+    :arg y: Array of cross-shore distances
+    :arg y_base: Distance to the base of the continental slope
+    :arg y_break: Distance to the shelf break
+    :arg y_coast: Distance beyond y_head where shelf flattens
+    :arg x: Array of alongshore distances
+    :arg x_wall: Width of the Domain
+    :arg fluid_depth: Total height of the fluid in the domain.
+    :arg z_bottom: Depth of the deep ocean (measured upward)
+    :arg z_break: Depth of the shelf break (measured upward)
+    :arg z_coast: Depth of shelf beyond y_coast (measured upward)
+    '''
+    
+    slope_profile = functions_idealized.tanktopo(y, y_base, y_break, y_coast, fluid_depth, z_bottom, z_break, z_coast)
+    
+    canyondepth = slope_profile
+  
+    topography = np.zeros((len(y),len(x)))
+    for j in np.arange(len(x)):
+        topography[:,j] = slope_profile
+    topo = -1* topography[0:-1, :]
+    topo = np.fliplr(np.rot90(topo, 2))
+   
+    return topo
+
+# ------------------------------------------------------------------------------------
+
 def create_bathy_file(X, Y, bathymetry, filename, title, description, ipynbname):
     
     ''' This function creates a netCDF4 file for
