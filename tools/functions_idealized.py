@@ -225,7 +225,7 @@ def make_topo_smooth(y, y_base, y_paral, y_pointA, y_pointB, y_break, y_head, y_
     shelf with a sech-shaped canyon. It uses the functions tanktopo,
     canyontopo, and widthprofile.
     
-    :arg y: Array of cross-shore distances
+    :arg y: Array of cross-shore distances (REMEMBER: use y_edge)
     :arg y_base: Distance to the base of the continental slope
     :arg y_paral: Distance to where isobaths start bending into canyon
     :arg y_break: Distance to the shelf break
@@ -276,7 +276,7 @@ def make_no_canyon(y, y_base, y_break, y_coast, x, x_wall, fluid_depth, z_bottom
     
     ''' Modified from make_topo_smooth.
     
-    :arg y: Array of cross-shore distances
+    :arg y: Array of cross-shore distances (REMEMBER: use y_edge)
     :arg y_base: Distance to the base of the continental slope
     :arg y_break: Distance to the shelf break
     :arg y_coast: Distance beyond y_head where shelf flattens
@@ -288,7 +288,7 @@ def make_no_canyon(y, y_base, y_break, y_coast, x, x_wall, fluid_depth, z_bottom
     :arg z_coast: Depth of shelf beyond y_coast (measured upward)
     '''
     
-    slope_profile = functions_idealized.tanktopo(y, y_base, y_break, y_coast, fluid_depth, z_bottom, z_break, z_coast)
+    slope_profile = tanktopo(y, y_base, y_break, y_coast, fluid_depth, z_bottom, z_break, z_coast)
     
     canyondepth = slope_profile
   
