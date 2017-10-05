@@ -9,6 +9,8 @@ import time
 from netCDF4 import Dataset
 from scipy.interpolate import griddata
 from salishsea_tools import bathy_tools
+from scipy import interpolate
+from scipy.interpolate import Rbf
 
 def extract_canyon(lon_s_grid, lat_s_grid, x_region, y_region, z_region):
     
@@ -186,8 +188,124 @@ def smooth_canyon(max_norm_depth_diff, smooth_factor, z_positive):
     z_original = np.ma.array(z_positive)
 
     return z_original, z_smoothed
+
+# ----------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------
+
+def calculate_slopes(z_smoothed):
     
+    slopes = np.zeros([z_smoothed.shape[-2], z_smoothed.shape[-1] - 1])
+
+    for j in range(z_smoothed.shape[-2]):
+        for i in range(z_smoothed.shape[-1] - 1):
+            slopes[j, i] = z_smoothed[j, i+1] - z_smoothed[j, i]
+
+    slopes_row_avg = np.mean(slopes, axis=1)
+    slopes_row_max = np.max(slopes, axis=1)
+    slopes_row_min = np.min(slopes, axis=1)
+
+    slopes_maxmin = np.zeros_like(slopes)
+
+    for j in range(z_smoothed.shape[-2]):
+        for i in range(z_smoothed.shape[-1] - 1):
+            if slopes[j, i] == slopes_row_max[j]:
+                slopes_maxmin[j, i] = 1
+            if slopes[j, i] == slopes_row_min[j]:
+                slopes_maxmin[j, i] = -1
+   
+    return slopes, slopes_row_max, slopes_row_min, slopes_maxmin, slopes_row_avg
+            
+# ----------------------------------------------------------------------------------------
+
+def identify_interp_inds(z_smoothed, slopes, slopes_row_max, slopes_row_min, buffer):
+    
+    bathy_centre = z_smoothed[:, int(0.5 * z_smoothed.shape[-1])]
+    frac_full = np.where(bathy_centre == 1300)[0][0] / z_smoothed.shape[-2]
+    frac_y = frac_full * buffer
+    ind_y = int(frac_y * z_smoothed.shape[-2])
+
+    ind_x_left0 = np.zeros(ind_y)
+    ind_x_right0 = np.zeros(ind_y)
+    ind_x_diff = np.zeros(ind_y)
+    for j in range(ind_y):
+        ind_x_left0[j] = np.where(slopes[j, :] == slopes_row_max[j])[0][0]
+        ind_x_right0[j] = np.where(slopes[j, :] == slopes_row_min[j])[0][0]
+        ind_x_diff[j] = ind_x_right0[j] - ind_x_left0[j]
+    
+    ind_x_diff_max = np.where(ind_x_diff == ind_x_diff.max())[0][0]
+    random_add = int(ind_x_diff[ind_x_diff_max]/7)
+    ind_x_left = ind_x_left0[ind_x_diff_max] + random_add
+    ind_x_right = ind_x_right0[ind_x_diff_max]
+
+    print(ind_y, ind_x_left, ind_x_right)
+
+    ind_x_left = 125
+    ind_x_right = 190
+    ind_y = 73
+
+    print(ind_y, ind_x_left, ind_x_right)
+
+    return ind_y, ind_x_left, ind_x_right
+
+# ----------------------------------------------------------------------------------------
+    
+def gather_interp_args(z_smoothed, ind_y, ind_x_left, ind_x_right):
+    
+    x_orig = np.array([])
+    y_orig = np.array([])
+    
+    for j in range(ind_y):     
+        x_orig_left = np.arange(ind_x_left + 1)
+        x_orig_right = np.arange(ind_x_right, z_smoothed.shape[-1])
+        x_orig0 = np.concatenate((x_orig_left, x_orig_right))
+        y_orig0 = np.ones_like(x_orig0) * j
+
+        x_orig = np.append(x_orig, x_orig0)
+        y_orig = np.append(y_orig, y_orig0)
+
+    for j in range(ind_y, z_smoothed.shape[-2]):
+        x_orig0 = np.arange(z_smoothed.shape[-1])
+        y_orig0 = np.ones_like(x_orig0) * j
+
+        x_orig = np.append(x_orig, x_orig0)
+        y_orig = np.append(y_orig, y_orig0)
+
+    z_orig = np.zeros_like(x_orig)
+    for k in range(len(x_orig)):
+        z_orig[k] = z_smoothed[y_orig[k], x_orig[k]]
+        
+    return x_orig, y_orig, z_orig
+    
+# ----------------------------------------------------------------------------------------
+
+def perform_interp(z_smoothed, x_orig, y_orig, z_orig):
+
+    rbf = Rbf(x_orig, y_orig, z_orig, function='linear')
+
+    xi = np.arange(z_smoothed.shape[-1])
+    yi = np.arange(z_smoothed.shape[-2])
+    XI, YI = np.meshgrid(xi, yi)
+    z_nocanyon_real = rbf(XI, YI)
+    
+    return z_nocanyon_real
+
+# ----------------------------------------------------------------------------------------
+
+def make_no_canyon_real(z_smoothed, buffer=0.78):
+    slopes, slopes_row_max, slopes_row_min, slopes_maxmin, slopes_row_avg = calculate_slopes(z_smoothed)
+    
+    ind_y, ind_x_left, ind_x_right = identify_interp_inds(z_smoothed, slopes, slopes_row_max, slopes_row_min, buffer)
+    
+    x_orig, y_orig, z_orig = gather_interp_args(z_smoothed, ind_y, ind_x_left, ind_x_right)
+    
+    z_nocanyon_real = perform_interp(z_smoothed, x_orig, y_orig, z_orig)
+    
+    return z_nocanyon_real
+    
+
+
 # -----------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------
 
 def create_bathy_file(bathymetry, filename, title, description, ipynbname):
     
