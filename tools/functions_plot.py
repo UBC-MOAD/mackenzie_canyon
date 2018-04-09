@@ -57,7 +57,7 @@ def def_regionG(xl=-145, xr=-133, yb=68.6, yt=72.5):
 
 #--------------------------------------------------------------------------------------
 
-def def_regionS(xl=-1750e3, xr=-1000e3, yb=1300e3, yt=2050e3):
+def def_regionS(xl=-1750e3, xr=-1000e3, yb=1250e3, yt=2050e3):
     ''' Returns an extract of the complete IBCAO bathymetric
     grid using xl, xr, yb, and yt, which correpond to the left,
     right, bottom, and top boundaries when plotted.
@@ -136,6 +136,8 @@ def Colormap():
 def plot_region(fig, ax, x_region, y_region, z_region):
     ax.contour(x_region, y_region, z_region, 25, colors='k', linestyles='solid', alpha=0.6)
     ax.contour(x_region, y_region, z_region, levels = [-80, -40.1], colors='k', linestyles='solid', alpha=0.6)
+    ax.set_xlim([x_region.min(), x_region.max()])
+    ax.set_ylim([y_region.min(), y_region.max()])
     return fig, ax
 
 #--------------------------------------------------------------------------------------
