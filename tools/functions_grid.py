@@ -49,21 +49,34 @@ def match_lines(p1_x, p1_y, p2_x_iterate, m_slope, ideal):
     through which the function iterates to find the one where
     the resulting line length is closes to the the value of 
     ideal which is the dimension of the idealized domain.
+    
+    Original (april 2018): abs(diff_i) < 400.0
     '''
-    for x_i in p2_x_iterate:
+    x_is = np.full(len(p2_x_iterate), np.nan)
+    y_is = np.full(len(p2_x_iterate), np.nan)
+    dist_is = np.full(len(p2_x_iterate), np.nan)
+    diff_is = np.full(len(p2_x_iterate), np.nan)
+    
+    for x_i, n in zip(p2_x_iterate, np.arange(len(p2_x_iterate))):
         y_i, dist_i, diff_i = match_distance(p1_x, p1_y, x_i, m_slope, ideal)
-        if abs(diff_i) < 300.0:
-            p2_x = x_i
-            p2_y = y_i
-            p2_dist = dist_i
-            p2_diff = diff_i
-        else:
-            pass
+        x_is[n] = x_i
+        y_is[n] = y_i
+        dist_is[n] = dist_i
+        diff_is[n] = diff_i
+        
+    diff_is_abs = np.absolute(diff_is)
+    index = np.argmin(diff_is_abs)
+
+    p2_x = x_is[index]
+    p2_y = y_is[index]
+    p2_dist = dist_is[index]
+    p2_diff = diff_is[index]
+
     return p2_x, p2_y, p2_dist, p2_diff
 
 # ------------------------------------------------------------------------------------------------
 
-def match_domain(x_wall, y_wall, search_x, slope=1.1, p_x0 = -1490000.0, p_y0 = 1310000.0):
+def match_domain(x_wall, y_wall, search_x, slope=1.2, p_x0 = -1490000.0, p_y0 = 1310000.0):
     '''This is the main function used to create the realistic domain.
     It uses match_lines to create each section of the rectangle.
     It makes the right angle corners and the sides are as close
@@ -78,7 +91,7 @@ def match_domain(x_wall, y_wall, search_x, slope=1.1, p_x0 = -1490000.0, p_y0 = 
     line length closest to the ideal size. The -500 is used
     when iterating leftward and 500 for rightward.
     
-    Original (april 2018): p_x0 = -1457500.0, p_y0 = 1348000.0
+    Original (april 2018): p_x0 = -1457500.0, p_y0 = 1348000.0, slope=1.1
     '''
 
     # All the slopes needed to make the perpendicular corners

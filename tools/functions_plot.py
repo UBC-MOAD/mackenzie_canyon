@@ -57,7 +57,7 @@ def def_regionG(xl=-145, xr=-133, yb=68.6, yt=72.5):
 
 #--------------------------------------------------------------------------------------
 
-def def_regionS(xl=-1750e3, xr=-1000e3, yb=1250e3, yt=2050e3):
+def def_regionS(xl=-1800e3, xr=-900e3, yb=1250e3, yt=2050e3):
     ''' Returns an extract of the complete IBCAO bathymetric
     grid using xl, xr, yb, and yt, which correpond to the left,
     right, bottom, and top boundaries when plotted.
