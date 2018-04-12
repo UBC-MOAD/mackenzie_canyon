@@ -183,6 +183,7 @@ def smooth_canyon(max_norm_depth_diff, smooth_factor, z_positive):
     
     z_to_smooth = np.array(z_positive, copy=True)
     z_masked0 = np.ma.array(z_to_smooth)
+
     z_smoothed = bathy_tools.smooth(z_masked0, max_norm_depth_diff, smooth_factor)
 
     z_original = np.ma.array(z_positive)

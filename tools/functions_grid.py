@@ -76,7 +76,7 @@ def match_lines(p1_x, p1_y, p2_x_iterate, m_slope, ideal):
 
 # ------------------------------------------------------------------------------------------------
 
-def match_domain(x_wall, y_wall, search_x, slope=1.2, p_x0 = -1490000.0, p_y0 = 1310000.0):
+def match_domain(x_wall, y_wall, search_x, slope=1.1, p_x0 = -1457500.0, p_y0 = 1348000.0):
     '''This is the main function used to create the realistic domain.
     It uses match_lines to create each section of the rectangle.
     It makes the right angle corners and the sides are as close
@@ -92,6 +92,7 @@ def match_domain(x_wall, y_wall, search_x, slope=1.2, p_x0 = -1490000.0, p_y0 = 
     when iterating leftward and 500 for rightward.
     
     Original (april 2018): p_x0 = -1457500.0, p_y0 = 1348000.0, slope=1.1
+    New but changed: slope=1.2, p_x0 = -1490000.0, p_y0 = 1310000.0
     '''
 
     # All the slopes needed to make the perpendicular corners
