@@ -7,7 +7,7 @@ config name: mackenzie03
 MPI decomposition: 2x2
 
 # Job identifier that appears in qstat listing
-run_id: mackenzie_long
+run_id: MCKNZ_sbcana
 
 # Wall-clock time requested for the run
 walltime: 00:05:00
@@ -17,16 +17,16 @@ email: imachuca@eos.ubc.ca
 
 paths:
   # Absolute path of the CONFIG directory in the NEMO-3.6-code code tree
-  NEMO code config: /ocean/imachuca/NEMO-3.6-code/NEMOGCM/CONFIG/
+  NEMO code config: /home/imachuca/NEMO-3.6-code/NEMOGCM/CONFIG/
   
   # Absolute or relative path to XIOS code tree
-  XIOS: /ocean/imachuca/XIOS/
+  XIOS: /home/imachuca/XIOS/
 
   # At present: Directory with grid subdirectory containing coordinates and bathymetry
-  forcing: /ocean/imachuca/Canyons/mackenzie_canyon/
+  forcing: /home/imachuca/Canyons/mackenzie_canyon/
 
   # Absolute or relative path to directory where the temporary run folder is created
-  runs directory: /ocean/imachuca/Canyons/results_mackenzie/idealized/
+  runs directory: /home/imachuca/Canyons/results_mackenzie/idealized/
 
 grid:
   # Names of files in the grid subdirectory of the forcing path
@@ -38,7 +38,7 @@ forcing:
   # Absolute or relative paths of targets of the symlinks created in the run directory
   # Other sub-section keys have been removed for now
   NEMO_files:
-    link to: /ocean/imachuca/Canyons/mackenzie_canyon/conditions/NEMO_files/
+    link to: /home/imachuca/Canyons/mackenzie_canyon/conditions/NEMO_files/
 
 namelists:
   # If relative, it is appended to the directory containing the run description file
@@ -48,8 +48,8 @@ namelists:
 output:
   # Relative path for run-specific output file or absolute path with configuration elements
   files: iodef.xml
-  domain: /ocean/imachuca/Canyons/mackenzie_canyon/output/domain_def.xml
-  fields: /ocean/imachuca/Canyons/mackenzie_canyon/output/field_def.xml
+  domain: /home/imachuca/Canyons/mackenzie_canyon/output/domain_def.xml
+  fields: /home/imachuca/Canyons/mackenzie_canyon/output/field_def.xml
   # Whether the XIOS server should be run on separate processors
   separate XIOS server: True
   # Number of XIOS servers if True
