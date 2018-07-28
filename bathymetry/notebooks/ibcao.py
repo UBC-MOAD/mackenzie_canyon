@@ -39,7 +39,7 @@ class IBCAO:
   # look in current path for grid file, I usually symlink it in here
   # from somewhere.
   ibcao_grid_name = 'IBCAO_V3_500m_RR.grd'
-  ibcao_grid_dir = '/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/grid'
+  ibcao_grid_dir = '/ocean/imachuca/Canyons/mackenzie_canyon/bathymetry/data'
   ibcao_grid = os.path.join(ibcao_grid_dir, ibcao_grid_name)
 
   VERSION = '3.0'
